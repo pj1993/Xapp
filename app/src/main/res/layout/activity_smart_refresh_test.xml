@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            app:layout_behavior="com.yuruiyin.appbarlayoutbehavior.AppBarLayoutBehavior"
+            app:elevation="0dp">
+
+        <!--appbarlayout里面的是不会会滑出的部分,
+        在设置了app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+        后就可以滑出去了-->
+            <View
+                android:background="#03A9F4"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                android:layout_width="match_parent"
+                android:layout_height="700dp"/>
+            <View
+                android:background="#9C27B0"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <!--这里的是固定部分,前提是设置相应的behavior-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_d"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</LinearLayout>

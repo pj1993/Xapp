@@ -2,10 +2,15 @@ package com.jsycn.pj_project;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Bundle;
-import android.util.Log;
+
 
 import androidx.lifecycle.ProcessLifecycleOwner;
+
+//import com.didichuxing.doraemonkit.DoraemonKit;
+//import com.didichuxing.doraemonkit.kit.AbstractKit;
+
+import com.jsycn.pj_project.widget.floating.DoraemonKit;
+import com.jsycn.pj_project.widget.floating.constant.DokitConstant;
 
 import java.util.ArrayList;
 import java.util.List;

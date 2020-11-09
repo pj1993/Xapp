@@ -69,4 +69,11 @@ dependencies {
     //BRVAH
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
     implementation 'com.github.yuruiyin:AppbarLayoutBehavior:v1.0.3'
+
+    //didi的哆啦A梦
+//    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.2.0'
+//    releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.2.0'
+
+    //blank的utils
+    implementation 'com.blankj:utilcodex:1.30.4'
 }

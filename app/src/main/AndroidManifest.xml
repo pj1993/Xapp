@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <application
         android:name=".MApplication"
         android:allowBackup="true"
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SmartRefreshTestActivity"></activity>
+        <activity android:name=".activity.CoordinatorLayoutActivity"></activity>
+        <activity android:name=".activity.SmartRefreshTestActivity" />
         <activity
             android:name=".testcls.activitymode.DModeAct"
             android:launchMode="singleInstance" />

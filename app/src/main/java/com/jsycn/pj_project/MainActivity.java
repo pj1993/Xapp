@@ -4,19 +4,21 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
+import com.jsycn.pj_project.activity.CoordinatorLayoutActivity;
 import com.jsycn.pj_project.activity.LianXupaizhaoTest;
 import com.jsycn.pj_project.activity.LottieTestAct;
 import com.jsycn.pj_project.activity.SmartRefreshTestActivity;
 import com.jsycn.pj_project.testcls.activitymode.AModeAct;
 import com.jsycn.pj_project.testcls.fragmenttest.FragmentLifeTestActivity;
+import com.jsycn.pj_project.widget.floating.DoraemonKit;
+import com.jsycn.pj_project.widget.floating.dokitview.MainIconDokitView;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -57,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_life).setOnClickListener(this);
         findViewById(R.id.bt_life_fragment).setOnClickListener(this);
         findViewById(R.id.bt_refresh_test).setOnClickListener(this);
+        findViewById(R.id.bt_cl_test).setOnClickListener(this);
+        findViewById(R.id.bt_xfc_test).setOnClickListener(this);
+        findViewById(R.id.bt_xfc_test_no).setOnClickListener(this);
     }
 
 
@@ -78,6 +83,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_refresh_test:
                 startActivity(new Intent(MainActivity.this, SmartRefreshTestActivity.class));
+                break;
+            case R.id.bt_cl_test:
+                startActivity(new Intent(MainActivity.this, CoordinatorLayoutActivity.class));
+                break;
+            case R.id.bt_xfc_test:
+                //初始化didi哆啦A梦
+                DoraemonKit.setSystemFloat(true);
+                DoraemonKit.install(getApplication());
+                DoraemonKit.show(this,MainIconDokitView.class);
+                break;
+            case R.id.bt_xfc_test_no:
+                DoraemonKit.setSystemFloat(false);
+                DoraemonKit.install(getApplication());
+                DoraemonKit.show(this,MainIconDokitView.class);
                 break;
         }
     }

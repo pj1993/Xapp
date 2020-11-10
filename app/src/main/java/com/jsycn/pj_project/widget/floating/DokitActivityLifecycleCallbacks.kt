@@ -63,21 +63,17 @@ internal class DokitActivityLifecycleCallbacks : Application.ActivityLifecycleCa
 
     override fun onActivityResumed(activity: Activity?) {
         activity?.let {
+            //记录activity状态
             recordActivityLifeCycleStatus(it, LIFE_CYCLE_STATUS_RESUME)
-            //记录页面层级 健康体检需要
-            if (it.javaClass.canonicalName != "com.didichuxing.doraemonkit.kit.base.UniversalActivity") {
-                //recordActivityUiLevel(activity)
-            }
-            //如果是leakCanary页面不进行添加
+            //是否是 不需要浮层的activity
             if (ignoreCurrentActivityDokitView(it)) {
                 return
             }
-
-
             //设置app的直接子view的Id
-            UIUtils.getDokitAppContentView(it)
+//            UIUtils.getDokitAppContentView(it)
             //添加DokitView
             resumeAndAttachDokitViews(it)
+            //监听回调
             for (listener in LifecycleListenerUtil.LIFECYCLE_LISTENERS) {
                 listener.onActivityResumed(it)
             }
@@ -108,9 +104,6 @@ internal class DokitActivityLifecycleCallbacks : Application.ActivityLifecycleCa
             //通知app退出到后台
             if (startedActivityCounts == 0) {
                 DokitViewManager.instance.notifyBackground()
-                //app 切换到后台 上传埋点数据
-                //TODO("功能需要实现")
-                //DataPickManager.getInstance().postData()
             }
         }
 
@@ -178,50 +171,6 @@ internal class DokitActivityLifecycleCallbacks : Application.ActivityLifecycleCa
         }
     }
 
-    /**
-     * 记录当前activity的UILevel
-     *
-     * @param activity
-     */
-//    private fun recordActivityUiLevel(activity: Activity) {
-//        try {
-//            if (!DokitConstant.APP_HEALTH_RUNNING) {
-//                return
-//            }
-//            val viewInfos = UIPerformanceUtil.getViewInfos(activity)
-//            var maxLevel = 0
-//            var maxTime = 0f
-//            var totalTime = 0f
-//            var maxLevelViewInfo: ViewInfo? = null
-//            var maxTimeViewInfo: ViewInfo? = null
-//            for (viewInfo in viewInfos) {
-//                if (viewInfo.layerNum > maxLevel) {
-//                    maxLevel = viewInfo.layerNum
-//                    maxLevelViewInfo = viewInfo
-//                }
-//                if (viewInfo.drawTime > maxTime) {
-//                    maxTime = viewInfo.drawTime
-//                    maxTimeViewInfo = viewInfo
-//                }
-//                totalTime += viewInfo.drawTime
-//            }
-//            val detail = """
-//                最大层级:$maxLevel
-//                控件id:${if (maxLevelViewInfo == null) "no id" else maxLevelViewInfo.id}
-//                总绘制耗时:${totalTime}ms
-//                绘制耗时最长控件:${maxTime}ms
-//                绘制耗时最长控件id:${if (maxTimeViewInfo == null) "no id" else maxTimeViewInfo.id}
-//
-//                """.trimIndent()
-//            val uiLevelBean = UiLevelBean()
-//            uiLevelBean.page = activity.javaClass.canonicalName
-//            uiLevelBean.level = "" + maxLevel
-//            uiLevelBean.detail = detail
-//            AppHealthInfoUtil.getInstance().addUiLevelInfo(uiLevelBean)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//    }
 
     /**
      * 记录当前Activity的生命周期状态
@@ -256,7 +205,7 @@ internal class DokitActivityLifecycleCallbacks : Application.ActivityLifecycleCa
     companion object {
         /**
          * 是否忽略在当前的activity上显示浮标
-         *
+         *ignoreActivityClassNames
          * @param activity
          * @return
          */

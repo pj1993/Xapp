@@ -39,6 +39,9 @@ class ViewBorderFrameLayout : FrameLayout {
         }
     }
 
+    /**
+     * 给所有子view加background（ViewBorderDrawable）
+     */
     private fun traverseChild(view: View) {
         //过滤掉dokitView
         if (view is ViewGroup && view !is DokitViewInterface) {
@@ -46,6 +49,7 @@ class ViewBorderFrameLayout : FrameLayout {
             val childCount = view.childCount
             if (childCount != 0) {
                 for (index in 0 until childCount) {
+                    //递归自己
                     traverseChild(view.getChildAt(index))
                 }
             }
@@ -54,6 +58,10 @@ class ViewBorderFrameLayout : FrameLayout {
         }
     }
 
+    /**
+     * 给view加一个 layerDrawable
+     * 原view有background，多加一层viewBorderDrawable
+     */
     private fun replaceDrawable(view: View) {
         if (view is TextureView) {
             // 过滤TextureView
@@ -91,6 +99,9 @@ class ViewBorderFrameLayout : FrameLayout {
         }
     }
 
+    /**
+     * 清除所有子view的background中带有viewBorderDrawable的层
+     */
     private fun clearChild(view: View) {
         if (view is ViewGroup) {
             clearDrawable(view)
@@ -105,18 +116,20 @@ class ViewBorderFrameLayout : FrameLayout {
         }
     }
 
+    /**
+     * 清除掉  background中 ViewBorderDrawable的层
+     */
     private fun clearDrawable(view: View) {
         if (view.background == null) {
             return
         }
         val oldDrawable = view.background as? LayerDrawable ?: return
-        val layerDrawable = oldDrawable
         val drawables: MutableList<Drawable> = ArrayList()
-        for (i in 0 until layerDrawable.numberOfLayers) {
-            if (layerDrawable.getDrawable(i) is ViewBorderDrawable) {
+        for (i in 0 until oldDrawable.numberOfLayers) {
+            if (oldDrawable.getDrawable(i) is ViewBorderDrawable) {
                 continue
             }
-            drawables.add(layerDrawable.getDrawable(i))
+            drawables.add(oldDrawable.getDrawable(i))
         }
         val newDrawable = LayerDrawable(drawables.toTypedArray())
         view.background = newDrawable

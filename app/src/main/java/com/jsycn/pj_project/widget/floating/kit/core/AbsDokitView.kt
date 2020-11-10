@@ -391,7 +391,7 @@ abstract class AbsDokitView : DokitView, TouchProxy.OnTouchEventListener, DokitV
         if (!canDrag()) {
             return
         }
-        if (isNormalMode) {
+        if (isNormalMode) {//普通的只要设置margin就能布局
             normalLayoutParams.leftMargin += dx
             normalLayoutParams.topMargin += dy
             //更新图标位置
@@ -413,29 +413,16 @@ abstract class AbsDokitView : DokitView, TouchProxy.OnTouchEventListener, DokitV
         if (!canDrag()) {
             return
         }
-//        if (tag == MainIconDokitView::class.java.simpleName) {
-//            if (isNormalMode) {
-//                FloatIconConfig.saveLastPosX(normalLayoutParams.leftMargin)
-//                FloatIconConfig.saveLastPosY(normalLayoutParams.topMargin)
-//            } else {
-//                FloatIconConfig.saveLastPosX(systemLayoutParams.x)
-//                FloatIconConfig.saveLastPosY(systemLayoutParams.y)
-//            }
-//        } else {
-//            //保存在内存中
-//            if (isNormalMode) {
-//                DokitViewManager.instance.saveDokitViewPos(tag, normalLayoutParams.leftMargin, normalLayoutParams.topMargin)
-//            } else {
-//                DokitViewManager.instance.saveDokitViewPos(tag, systemLayoutParams.x, systemLayoutParams.y)
-//            }
-//        }
         //保存在内存中
+        saveLocationToSp()
+    }
+
+    protected fun saveLocationToSp(){
         if (isNormalMode) {
             DokitViewManager.instance.saveDokitViewPos(tag, normalLayoutParams.leftMargin, normalLayoutParams.topMargin)
         } else {
             DokitViewManager.instance.saveDokitViewPos(tag, systemLayoutParams.x, systemLayoutParams.y)
         }
-        //是否需要吸边
     }
 
     /**
@@ -543,7 +530,7 @@ abstract class AbsDokitView : DokitView, TouchProxy.OnTouchEventListener, DokitV
 
     /**
      * 更新view的位置
-     *
+     *  仅限普通浮层
      * @param isActivityResume 是否是从其他页面返回时更新的位置
      */
     open fun updateViewLayout(tag: String, isActivityResume: Boolean) {
@@ -551,16 +538,6 @@ abstract class AbsDokitView : DokitView, TouchProxy.OnTouchEventListener, DokitV
             return
         }
         if (isActivityResume) {
-//            if (tag == MainIconDokitView::class.java.simpleName) {//保存位置信息到sp文件中
-//                normalLayoutParams.leftMargin = FloatIconConfig.getLastPosX()
-//                normalLayoutParams.topMargin = FloatIconConfig.getLastPosY()
-//            } else {
-//                val point = DokitViewManager.instance.getDokitViewPos(tag)
-//                if (point != null) {
-//                    normalLayoutParams.leftMargin = point.x
-//                    normalLayoutParams.topMargin = point.y
-//                }
-//            }
             val point = DokitViewManager.instance.getDokitViewPos(tag)
             if (point != null) {
                 normalLayoutParams.leftMargin = point.x
@@ -571,16 +548,9 @@ abstract class AbsDokitView : DokitView, TouchProxy.OnTouchEventListener, DokitV
             mLastDokitViewPosInfo.setLeftMargin(normalLayoutParams.leftMargin)
             mLastDokitViewPosInfo.setTopMargin(normalLayoutParams.topMargin)
         }
-//        if (tag == MainIconDokitView::class.java.simpleName) {
-//            normalLayoutParams.width = MainIconDokitView.FLOAT_SIZE
-//            normalLayoutParams.height = MainIconDokitView.FLOAT_SIZE
-//        } else {
-//            normalLayoutParams.width = mDokitViewWidth
-//            normalLayoutParams.height = mDokitViewHeight
-//        }
+
         normalLayoutParams.width = mDokitViewWidth
         normalLayoutParams.height = mDokitViewHeight
-
 
         //portraitOrLandscape(mFrameLayoutParams);
         resetBorderline(normalLayoutParams)

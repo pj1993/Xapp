@@ -73,7 +73,7 @@ internal class NormalDokitViewManager(val mContext: Context) : DokitViewManagerI
                 return
             }
 
-            val activityLifecycleInfo = DokitConstant.ACTIVITY_LIFECYCLE_INFOS[it.javaClass.canonicalName]
+            val activityLifecycleInfo = DokitConstant.ACTIVITY_LIFECYCLE_INFOS[it.javaClass.canonicalName ?: ""]
                     ?: return
             //新建Activity
             if (activityLifecycleInfo.activityLifeCycleCount == ActivityLifecycleInfo.ACTIVITY_LIFECYCLE_CREATE2RESUME) {
@@ -175,15 +175,6 @@ internal class NormalDokitViewManager(val mContext: Context) : DokitViewManagerI
         //更新所有全局DokitView的位置
         if (mGlobalSingleDokitViews.isNotEmpty()) {
             for (globalSingleDokitViewInfo in mGlobalSingleDokitViews.values) {
-                //TODO 拦截哪些页面不显示
-//                if (activity is UniversalActivity && globalSingleDokitViewInfo.absDokitViewClass != PerformanceDokitView::class.java) {
-//                    continue
-//                }
-//                //是否过滤掉 入口icon
-//                if (!DokitConstant.AWAYS_SHOW_MAIN_ICON && globalSingleDokitViewInfo.absDokitViewClass == MainIconDokitView::class.java) {
-//                    continue
-//                }
-
                 //LogHelper.i(TAG, " activity  resume==>" + activity.getClass().getSimpleName() + "  dokitView==>" + globalSingleDokitViewInfo.getTag());
                 //判断resume Activity 中时候存在指定的dokitview
                 var existDokitView: AbsDokitView? = null
@@ -194,7 +185,7 @@ internal class NormalDokitViewManager(val mContext: Context) : DokitViewManagerI
 
                 //当前页面已存在dokitview
                 if (existDokitView?.rootView != null) {
-                    existDokitView.rootView!!.visibility = View.VISIBLE
+                    existDokitView.rootView.visibility = View.VISIBLE
                     //更新位置
                     existDokitView.updateViewLayout(existDokitView.tag, true)
                     existDokitView.onResume()
@@ -206,25 +197,9 @@ internal class NormalDokitViewManager(val mContext: Context) : DokitViewManagerI
                     attach(dokitIntent)
                 }
             }
-//            if (!mGlobalSingleDokitViews.containsKey(MainIconDokitView::class.java.simpleName)) {
-//                attachMainIconDokitView(activity)
-//            }
         }
-//        else {
-//            //假如不存在全局的icon这需要全局显示主icon
-//            attachMainIconDokitView(activity)
-//        }
-//        attachCountDownDokitView(activity)
     }
 
-//    private fun attachMainIconDokitView(activity: Activity?) {
-//        //假如不存在全局的icon这需要全局显示主icon
-//        if (DokitConstant.AWAYS_SHOW_MAIN_ICON && activity !is UniversalActivity) {
-//            val dokitIntent = DokitIntent(MainIconDokitView::class.java)
-//            dokitIntent.mode = DokitIntent.MODE_SINGLE_INSTANCE
-//            attach(dokitIntent)
-//        }
-//    }
 
     override fun onActivityPause(activity: Activity?) {
         val dokitViews: Map<String, AbsDokitView?> = getDokitViews(activity)

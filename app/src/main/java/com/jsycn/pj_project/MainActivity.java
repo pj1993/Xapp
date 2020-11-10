@@ -17,6 +17,7 @@ import com.jsycn.pj_project.activity.SmartRefreshTestActivity;
 import com.jsycn.pj_project.testcls.activitymode.AModeAct;
 import com.jsycn.pj_project.testcls.fragmenttest.FragmentLifeTestActivity;
 import com.jsycn.pj_project.widget.floating.DoraemonKit;
+import com.jsycn.pj_project.widget.floating.dokitview.AdsorptionDokitView;
 import com.jsycn.pj_project.widget.floating.dokitview.MainIconDokitView;
 
 
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_xfc_test_no:
                 DoraemonKit.setSystemFloat(false);
                 DoraemonKit.install(getApplication());
-                DoraemonKit.show(this,MainIconDokitView.class);
+                DoraemonKit.show(this, AdsorptionDokitView.class);
                 break;
         }
     }

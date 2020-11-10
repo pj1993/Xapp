@@ -18,17 +18,15 @@ class MainIconDokitView : AbsDokitView() {
     override fun onCreate(context: Context?) {}
 
 
-    override fun onCreateView(context: Context?, view: FrameLayout?): View {
-        return LayoutInflater.from(context).inflate(R.layout.dk_main_launch_icon, view, false)
+    override fun onCreateView(context: Context?, rootView: FrameLayout?): View {
+        return LayoutInflater.from(context).inflate(R.layout.dk_main_launch_icon, rootView, false)
     }
 
-    override fun onViewCreated(view: FrameLayout?) {
+    override fun onViewCreated(rootView: FrameLayout?) {
         //设置id便于查找
-        rootView?.id = R.id.float_icon_id
+        this.rootView.id = R.id.float_icon_id
         //设置icon 点击事件
-        rootView?.setOnClickListener { //统计入口
-            //DataPickManager.getInstance().addData("dokit_sdk_home_ck_entry"); //TODO("功能待实现")
-//            showToolPanel()
+        this.rootView.setOnClickListener {
             ToastUtils.showLong("awsl")
         }
     }

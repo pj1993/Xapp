@@ -18,10 +18,6 @@ class DokitFragmentLifecycleCallbacks : FragmentManager.FragmentLifecycleCallbac
 
     override fun onFragmentAttached(fm: FragmentManager, fragment: Fragment, context: Context) {
         super.onFragmentAttached(fm, fragment, context)
-        //TODO("需要对照实现")
-//        if (fragment is DbDebugFragment) {
-//            DokitConstant.DB_DEBUG_FRAGMENT = WeakReference(fragment)
-//        }
         for (listener in LifecycleListenerUtil.LIFECYCLE_LISTENERS) {
             listener.onFragmentAttached(fragment)
         }
@@ -29,11 +25,6 @@ class DokitFragmentLifecycleCallbacks : FragmentManager.FragmentLifecycleCallbac
 
     override fun onFragmentDetached(fm: FragmentManager, fragment: Fragment) {
         super.onFragmentDetached(fm, fragment)
-        //TODO("需要对照实现")
-//        if (fragment is DbDebugFragment) {
-//            DokitConstant.DB_DEBUG_FRAGMENT!!.clear()
-//            DokitConstant.DB_DEBUG_FRAGMENT = null
-//        }
         for (listener in LifecycleListenerUtil.LIFECYCLE_LISTENERS) {
             listener.onFragmentDetached(fragment)
         }

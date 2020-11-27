@@ -74,6 +74,35 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"/>
 
+        <Button
+            android:id="@+id/bt_floating_my"
+            android:text="我的floatingView"
+            app:layout_constraintTop_toBottomOf="@+id/bt_xfc_test_no"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+        <Button
+            android:id="@+id/bt_leak"
+            android:text="内存泄漏测试"
+            app:layout_constraintTop_toBottomOf="@+id/bt_floating_my"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+        <Button
+            android:id="@+id/bt_countDown"
+            android:text="倒计时测试"
+            app:layout_constraintTop_toBottomOf="@+id/bt_leak"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="40dp"/>
+        <Button
+            android:id="@+id/bt_countDown_cancel"
+            android:text="暂停"
+            app:layout_constraintTop_toBottomOf="@+id/bt_leak"
+            app:layout_constraintLeft_toRightOf="@+id/bt_countDown"
+            android:layout_width="0dp"
+            android:layout_height="40dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.scwang.smart.refresh.layout.SmartRefreshLayout>

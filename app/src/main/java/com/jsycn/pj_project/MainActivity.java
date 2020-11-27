@@ -1,6 +1,7 @@
 package com.jsycn.pj_project;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -11,19 +12,35 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.jsycn.pj_project.activity.CoordinatorLayoutActivity;
+import com.jsycn.pj_project.activity.LeakCanaryActivity;
 import com.jsycn.pj_project.activity.LianXupaizhaoTest;
 import com.jsycn.pj_project.activity.LottieTestAct;
 import com.jsycn.pj_project.activity.SmartRefreshTestActivity;
+import com.jsycn.pj_project.entity.MessageBean;
 import com.jsycn.pj_project.testcls.activitymode.AModeAct;
 import com.jsycn.pj_project.testcls.fragmenttest.FragmentLifeTestActivity;
+import com.jsycn.pj_project.widget.MessageFloatingView;
 import com.jsycn.pj_project.widget.floating.DoraemonKit;
 import com.jsycn.pj_project.widget.floating.dokitview.AdsorptionDokitView;
 import com.jsycn.pj_project.widget.floating.dokitview.MainIconDokitView;
+import com.jsyncpj.floating.FloatingCtrl;
+import com.jsyncpj.floating.model.FloatingIntent;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv_handler;
+    private CountDownTimer countDownTimer = new CountDownTimer(10000,1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            tv_handler.setText(""+millisUntilFinished);
+        }
+
+        @Override
+        public void onFinish() {
+            tv_handler.setText("结束");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_cl_test).setOnClickListener(this);
         findViewById(R.id.bt_xfc_test).setOnClickListener(this);
         findViewById(R.id.bt_xfc_test_no).setOnClickListener(this);
+        findViewById(R.id.bt_leak).setOnClickListener(this);
+        findViewById(R.id.bt_floating_my).setOnClickListener(this);
+        findViewById(R.id.bt_countDown).setOnClickListener(this);
+        findViewById(R.id.bt_countDown_cancel).setOnClickListener(this);
     }
 
 
@@ -98,6 +119,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DoraemonKit.setSystemFloat(false);
                 DoraemonKit.install(getApplication());
                 DoraemonKit.show(this, AdsorptionDokitView.class);
+                break;
+            case R.id.bt_leak:
+                startActivity(new Intent(MainActivity.this, LeakCanaryActivity.class));
+                break;
+            case R.id.bt_floating_my:
+//                FloatingCtrl.setSystemFloat(false);
+//                FloatingCtrl.install(getApplication());
+                //初始化放在app中
+                FloatingIntent intent = new FloatingIntent(MessageFloatingView.class);
+                intent.setMode(FloatingIntent.MODE_SINGLE_INSTANCE);
+                intent.setBundle(new Bundle());
+                intent.getBundle().putSerializable("MessageFloatingView",new MessageBean());
+                FloatingCtrl.show(this,intent);
+                break;
+            case R.id.bt_countDown:
+                countDownTimer.start();//对于暂停的，会重新开始
+                break;
+            case R.id.bt_countDown_cancel:
+//                countDownTimer.onFinish();//没有效果
+                countDownTimer.cancel();
                 break;
         }
     }

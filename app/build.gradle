@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
@@ -76,4 +76,12 @@ dependencies {
 
     //blank的utils
     implementation 'com.blankj:utilcodex:1.30.4'
+
+
+    //内存泄漏
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+    implementation 'com.squareup.leakcanary:leakcanary-object-watcher-android:2.5'
+
+    //悬浮窗
+    implementation 'com.github.pj1993:FloatingView:v1.0.0'
 }

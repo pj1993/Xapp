@@ -20,9 +20,6 @@ import com.jsycn.pj_project.entity.MessageBean;
 import com.jsycn.pj_project.testcls.activitymode.AModeAct;
 import com.jsycn.pj_project.testcls.fragmenttest.FragmentLifeTestActivity;
 import com.jsycn.pj_project.widget.MessageFloatingView;
-import com.jsycn.pj_project.widget.floating.DoraemonKit;
-import com.jsycn.pj_project.widget.floating.dokitview.AdsorptionDokitView;
-import com.jsycn.pj_project.widget.floating.dokitview.MainIconDokitView;
 import com.jsyncpj.floating.FloatingCtrl;
 import com.jsyncpj.floating.model.FloatingIntent;
 
@@ -111,14 +108,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_xfc_test:
                 //初始化didi哆啦A梦
-                DoraemonKit.setSystemFloat(true);
-                DoraemonKit.install(getApplication());
-                DoraemonKit.show(this,MainIconDokitView.class);
+//                DoraemonKit.setSystemFloat(true);
+//                DoraemonKit.install(getApplication());
+//                DoraemonKit.show(this,MainIconDokitView.class);
                 break;
             case R.id.bt_xfc_test_no:
-                DoraemonKit.setSystemFloat(false);
-                DoraemonKit.install(getApplication());
-                DoraemonKit.show(this, AdsorptionDokitView.class);
+//                DoraemonKit.setSystemFloat(false);
+//                DoraemonKit.install(getApplication());
+//                DoraemonKit.show(this, AdsorptionDokitView.class);
                 break;
             case R.id.bt_leak:
                 startActivity(new Intent(MainActivity.this, LeakCanaryActivity.class));

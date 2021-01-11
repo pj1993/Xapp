@@ -40,6 +40,7 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
     implementation 'com.google.android.material:material:1.2.1'
 
+    implementation project(':base')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -71,8 +72,8 @@ dependencies {
     implementation 'com.github.yuruiyin:AppbarLayoutBehavior:v1.0.3'
 
     //didi的哆啦A梦
-//    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.2.0'
-//    releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.2.0'
+    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.2.0'
+    releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.2.0'
 
     //blank的utils
     implementation 'com.blankj:utilcodex:1.30.4'
@@ -84,4 +85,7 @@ dependencies {
 
     //悬浮窗
     implementation 'com.github.pj1993:FloatingView:v1.0.0'
+
+    //magic indicator
+    implementation 'com.github.hackware1993:MagicIndicator:1.7.0' // for androidx
 }

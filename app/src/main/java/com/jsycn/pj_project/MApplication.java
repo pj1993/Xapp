@@ -7,6 +7,7 @@ import android.app.Application;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
 
+import com.didichuxing.doraemonkit.DoraemonKit;
 import com.jsyncpj.floating.FloatingCtrl;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class MApplication extends Application {
         AppWatcher.setConfig(build);
         FloatingCtrl.setSystemFloat(false);
         FloatingCtrl.install(this);
+        DoraemonKit.install(this);
     }
 
 

@@ -12,7 +12,7 @@ import com.jsycn.pj_project.R
  *@Author: jsync
  *@CreateDate: 2021/1/11 18:46
  */
-class ToolsFragment: Fragment() {
+class ToolsFragment: LazyFragmentNew() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

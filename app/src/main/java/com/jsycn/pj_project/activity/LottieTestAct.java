@@ -27,7 +27,7 @@ public class LottieTestAct extends AppCompatActivity {
         mAnimationView = findViewById(R.id.lt_top);
 
         mAnimationView.setAnimation("antui_refresh_blue.json");
-        mAnimationView.useHardwareAcceleration(true);
+//        mAnimationView.useHardwareAcceleration(true);
         mAnimationView.setRepeatCount(1);//设置-1表示循环
 
     }

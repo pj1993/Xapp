@@ -105,7 +105,7 @@ class HomeActivity : BaseActivity() {
         vp_home_content.adapter =mAdapter
     }
 
-    @SuppressLint("WrongConstant")
+
     class HomePagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         val data = mutableListOf<Fragment>()
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.jsycn.pj_project.MainActivity
 import com.jsycn.pj_project.R
@@ -23,7 +24,13 @@ class HomeFragment: LazyFragmentNew() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bt_old_main.setOnClickListener {
+
+        bt_countDown_cancel.setOnClickListener {
+            val b = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!,bt_countDown_cancel,"img_test").toBundle()
+            startActivity(Intent(activity,MainActivity::class.java),b)
+        }
+        bt_zcdh.setOnClickListener {
+            //转场动画
             startActivity(Intent(activity,MainActivity::class.java))
         }
     }

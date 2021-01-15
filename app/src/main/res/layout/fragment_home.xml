@@ -10,12 +10,18 @@
 
 
         <Button
-            android:id="@+id/bt_old_main"
+            android:id="@+id/bt_countDown_cancel"
             android:text="之前的main里面的测试"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="60dp"/>
 
+        <Button
+            android:id="@+id/bt_zcdh"
+            android:text="转场动画"
+            app:layout_constraintTop_toBottomOf="@+id/bt_countDown_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

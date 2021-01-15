@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+<!--        允许过度动画-->
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <!--冷启动优化，启动界面的主题,这里也可以直接是一张图片-->

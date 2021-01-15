@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -32,6 +33,13 @@ class HomeActivity : BaseActivity() {
         val selectedIcon : IntArray = intArrayOf(R.drawable.ic_icon_home_selected,R.drawable.ic_icon_view_selected,R.drawable.ic_icon_tools_selected)
         val normalIcon : IntArray = intArrayOf(R.drawable.ic_icon_home_normal,R.drawable.ic_icon_view_normal,R.drawable.ic_icon_tools_normal)
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun initLayout(): Int {
         return R.layout.activity_home
     }

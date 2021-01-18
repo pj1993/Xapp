@@ -23,4 +23,14 @@
         <item name="android:windowBackground">@drawable/ll_toolbar_placeholder</item>
     </style>
 
+    <!--***************************************dialog 的style**************************************************************-->
+    <style name="iOSAnimStyle">
+        <item name="android:windowEnterAnimation">@anim/enter_ios_anim</item>
+        <item name="android:windowExitAnimation">@anim/exit_ios_anim</item>
+    </style>
+    <style name="BottomDialog_Animation_Style" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_dialog_into</item>
+        <item name="android:windowExitAnimation">@anim/bottom_dialog_out</item>
+    </style>
+    <!--***************************************dialog 的style**************************************************************-->
 </resources>

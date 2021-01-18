@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#989898"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.dialog.DialogActivity">
+
+    <Button
+        android:id="@+id/bt_commonly"
+        android:text="通用的dialogFragment"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_ios"
+        android:text="通用的ios风格"
+        app:layout_constraintTop_toBottomOf="@+id/bt_commonly"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--<androidx.core.widget.NestedScrollView -->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="#989898"-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context=".activity.dialog.DialogActivity">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/bt_commonly"-->
+<!--            android:text="通用的dialogFragment"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/bt_ios"-->
+<!--            android:text="通用的ios风格"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/bt_commonly"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"/>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--</androidx.core.widget.NestedScrollView>-->
+
+

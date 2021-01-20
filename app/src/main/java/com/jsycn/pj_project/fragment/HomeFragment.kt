@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.jsycn.pj_project.MainActivity
 import com.jsycn.pj_project.R
+import com.jsycn.pj_project.utils.getStatusBarHeight
+import com.jsycn.pj_project.utils.setAndroidNativeLightStatusBar
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -16,22 +19,36 @@ import kotlinx.android.synthetic.main.fragment_home.*
  *@Author: jsync
  *@CreateDate: 2021/1/11 18:41
  */
-class HomeFragment: LazyFragmentNew() {
+class HomeFragment : LazyFragmentOld() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun lazyInit() {
+
+    }
+
+    override fun onVisible() {
+        initTitle()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        bt_countDown_cancel.setOnClickListener {
-            val b = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!,bt_countDown_cancel,"img_test").toBundle()
-            startActivity(Intent(activity,MainActivity::class.java),b)
+        activity?.let {
+            getStatusBarHeight(it) { height ->
+                val params = v_status.layoutParams as ConstraintLayout.LayoutParams
+                params.height = height
+                v_status.layoutParams = params
+                v_status.visibility = View.VISIBLE
+            }
+            setAndroidNativeLightStatusBar(it, true)
         }
-        bt_zcdh.setOnClickListener {
-            //转场动画
-            startActivity(Intent(activity,MainActivity::class.java))
+    }
+
+    private fun initTitle() {
+        activity?.let {
+            setAndroidNativeLightStatusBar(it, true)
         }
     }
 

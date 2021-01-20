@@ -1,13 +1,14 @@
 package com.jsycn.pj_project.activity
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Window
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,6 +18,8 @@ import com.jsycn.pj_project.R
 import com.jsycn.pj_project.fragment.HomeFragment
 import com.jsycn.pj_project.fragment.ToolsFragment
 import com.jsycn.pj_project.fragment.ViewFragment
+import com.jsycn.pj_project.utils.getStatusBarHeight
+import com.jsycn.pj_project.utils.setAndroidNativeLightStatusBar
 import kotlinx.android.synthetic.main.activity_home.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
@@ -35,8 +38,14 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        //沉浸式：方案，透明状态栏，顶到头,设置占位状态栏view
+        if (Build.VERSION.SDK_INT >= 21) {
+            val decorView = window.decorView
+            val option = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            decorView.systemUiVisibility = option
+            window.statusBarColor = Color.TRANSPARENT
+        }
         super.onCreate(savedInstanceState)
     }
 
@@ -45,6 +54,8 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun initView() {
+        //设置底部导航栏颜色，像小米系统底部颜色会有适配问题
+        window?.navigationBarColor = ContextCompat.getColor(this,R.color.titleAndBottomColor)
         initViewPager()
         initIndicator()
     }

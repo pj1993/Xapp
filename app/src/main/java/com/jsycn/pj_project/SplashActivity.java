@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jsycn.pj_project.activity.HomeActivity;
+import static com.jsycn.pj_project.activity.dialog.DialogActivityKt.setFullScreen;
 
 
 /**
@@ -18,7 +19,19 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, HomeActivity.class));
-        this.finish();
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                    SplashActivity.this.finish();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+        setFullScreen(this);
     }
+
 }

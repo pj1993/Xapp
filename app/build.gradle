@@ -90,4 +90,7 @@ dependencies {
 
     //magic indicator
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0' // for androidx
+
+    //statusbar
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
 }

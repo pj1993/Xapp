@@ -10,4 +10,8 @@
     <color name="textSelectedColor">#1296db</color>
 
 
+    <color name="dialogActBg">#F3F3F3</color>
+
+    <color name="titleAndBottomColor">#F5F5F5</color>
+
 </resources>

@@ -49,6 +49,12 @@ abstract class LazyFragmentOld : BaseFragment() {
             Log.d(TAG, "lazyInit:!!!!!!!")
             isLoaded = true
         }
+        if (isVisibleToUser && isCallResume){
+            onVisible()
+        }
+    }
+    open fun onVisible(){
+
     }
 
     override fun onHiddenChanged(hidden: Boolean) {

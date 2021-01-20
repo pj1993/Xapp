@@ -1,6 +1,8 @@
 package com.jsycn.pj_project.activity.dialog
 
+import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -12,6 +14,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.core.content.ContextCompat
+import com.jaeger.library.StatusBarUtil
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.databinding.ActivityDialogBinding
 import java.lang.reflect.Method
@@ -47,34 +51,39 @@ public fun getNavigationBarHeight(context: Context):Int{
     return 0
 }
 
+
+fun setFullScreen(activity: Activity) {
+    val window = activity.window
+    val decorView = window.decorView
+    // Set the IMMERSIVE flag.
+    // Set the content to appear under the system bars so that the content
+    // doesn't resize when the system bars hide and show.
+    val option = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+//            or View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+            or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+    decorView.systemUiVisibility = option
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        val lp = window.attributes
+        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+        window.attributes = lp
+    }
+}
 class DialogActivity : AppCompatActivity() {
     private lateinit var rootBinding: ActivityDialogBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         rootBinding = ActivityDialogBinding.inflate(LayoutInflater.from(this))
-        //解决title变黑，和小米11底部无法遮挡的问题
-        window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         setContentView(rootBinding.root)
+        //设置底部导航栏颜色，像小米系统底部颜色会有适配问题
+        window?.navigationBarColor = ContextCompat.getColor(this,R.color.dialogActBg)
+        StatusBarUtil.setTransparent(this)
+        StatusBarUtil.setLightMode(this)
         initClick()
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        setRealHeight()
-//    }
-
-    private fun setRealHeight(){
-        val lp =rootBinding.root.layoutParams
-        //获取真实高度
-        val metrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(metrics)
-        var height = metrics.heightPixels
-        if (isXiaoMiFullScreen(this)) {
-            height += getNavigationBarHeight(this)
-        }
-        lp.height = height
-        rootBinding.root.layoutParams = lp
-    }
 
     private fun initClick(){
         rootBinding.btCommonly.setOnClickListener {

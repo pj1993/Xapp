@@ -14,4 +14,15 @@
 
     <color name="titleAndBottomColor">#F5F5F5</color>
 
+    <!--    dialog-->
+    <color name="ios_menu_bkg">#f2ffffff</color>
+    <color name="ios_dlg_bkg">#E6FFFFFF</color>
+    <color name="ios_dlg_text">#007aff</color>
+
+    <color name="ios_dialog_button_press">#0f000000</color>
+    <color name="ios_dialog_button_press_dark">#80323232</color>
+
+    <color name="ios_dialog_split_light">#2c000000</color>
+    <color name="ios_dialog_split_dark">#4e4e50</color>
+
 </resources>

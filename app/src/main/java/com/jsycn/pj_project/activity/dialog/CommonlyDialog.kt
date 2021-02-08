@@ -8,7 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatDialogFragment
 
 /**
- *@Description:通用的（一般用于简单的填充view）
+ *@Description:通用的DialogFragment,需要自己添加view（一般用于简单的填充view）
  *@Author: jsync
  *@CreateDate: 2021/1/18 14:29
  */

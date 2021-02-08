@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.dialog.DialogActivity">
 
+
     <Button
         android:id="@+id/bt_commonly"
         android:text="通用的dialogFragment"
@@ -19,6 +20,82 @@
         android:id="@+id/bt_ios"
         android:text="通用的ios风格"
         app:layout_constraintTop_toBottomOf="@+id/bt_commonly"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_popup_1"
+        android:text="左上弹出popup"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_ios"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_popup_2"
+        android:text="中上弹出popup"
+        app:layout_constraintLeft_toRightOf="@+id/bt_popup_1"
+        app:layout_constraintTop_toBottomOf="@+id/bt_ios"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_popup_3"
+        android:text="右上弹出popup"
+        app:layout_constraintLeft_toRightOf="@+id/bt_popup_2"
+        app:layout_constraintTop_toBottomOf="@+id/bt_ios"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_popup"
+        android:text="全屏popup"
+        app:layout_constraintTop_toBottomOf="@+id/bt_popup_1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_dialog_1"
+        android:text="一个选择框"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_dialog_2"
+        android:text="2个选择框"
+        app:layout_constraintLeft_toRightOf="@+id/bt_dialog_1"
+        app:layout_constraintTop_toBottomOf="@+id/bt_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_dialog_3"
+        android:text="3个选择框"
+        app:layout_constraintLeft_toRightOf="@+id/bt_dialog_2"
+        app:layout_constraintTop_toBottomOf="@+id/bt_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_dialog_max"
+        android:text="列表带最大高度"
+        app:layout_constraintTop_toBottomOf="@+id/bt_dialog_1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_dialog_list"
+        android:text="一次弹出多个"
+        app:layout_constraintTop_toBottomOf="@+id/bt_dialog_max"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <Button
+        android:id="@+id/bt_dialog_list_2"
+        android:text="一次弹出多个(模拟延时)"
+        app:layout_constraintTop_toBottomOf="@+id/bt_dialog_list"
         android:layout_width="match_parent"
         android:layout_height="60dp"/>
 

@@ -2,14 +2,13 @@ package com.jsycn.pj_project.activity.dialog
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowManager
+import android.view.*
+import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +16,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.content.ContextCompat
 import com.jaeger.library.StatusBarUtil
 import com.jsycn.pj_project.R
+import com.jsycn.pj_project.activity.dialog.NormalDialog.*
 import com.jsycn.pj_project.databinding.ActivityDialogBinding
 import java.lang.reflect.Method
 
@@ -86,36 +86,142 @@ class DialogActivity : AppCompatActivity() {
 
 
     private fun initClick(){
+        //通用
         rootBinding.btCommonly.setOnClickListener {
-            CommonlyDialog.Builder()
-                    .setDialog(FullscreenBottomDialog(this))
-                    .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
-                        override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
-                            view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
-                                Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()
-                                dialog?.dismiss()
-                            }
-                        }
-                    })
-                    .build().show(supportFragmentManager,CommonlyDialog::class.simpleName)
+            getDialogFragment().show(supportFragmentManager,CommonlyDialog::class.simpleName)
+        }
+        //ios
+        rootBinding.btIos.setOnClickListener {
+            getIosDialogFragment().show(supportFragmentManager,CommonlyDialog::class.simpleName)
+        }
+        //全屏popup
+        rootBinding.btPopup.setOnClickListener {
+            getPopup().showAtLocation(window.decorView, Gravity.CENTER, 0, 0)
+        }
+        //dialog
+        rootBinding.btDialog1.setOnClickListener {
+            NormalDialog.Builder()
+                    .setDialogType(DIALOG_CONFIRM)
+                    .setCanceledOnTouchOutside(false)
+                    .setCancelable(false)
+                    .setTip("你在想peach？")
+                    .setTitle("警告!")
+                    .setAutoClose(false)
+                    .setPositiveListener { d, _ ->
+                        d.dismiss()
+                    }
+                    .build(this).show()
+        }
+        rootBinding.btDialog2.setOnClickListener {
+            NormalDialog.Builder()
+                    .setDialogType(DIALOG_SELECT)
+                    .setTitle("提示!")
+                    .setTip("是否要删除？")
+                    .setPositiveListener { _, _ ->
 
+                    }
+                    .build(this).show()
+        }
+        rootBinding.btDialog3.setOnClickListener {
+            NormalDialog.Builder()
+                    .setDialogType(DIALOG_ONEINPUT)
+                    .setTitle("提示!")
+                    .setTip("是否要删除？")
+                    .setPositiveListener { _, _ ->
+
+                    }
+                    .build(this).show()
         }
 
-        rootBinding.btIos.setOnClickListener {
-            CommonlyDialog.Builder()
-                    .setDialog(FullScreenIosDialog(this))
-                    .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
-                        override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
-                            view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
-                                Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()
-                                dialog?.dismiss()
-                            }
-                        }
-                    })
-                    .build().show(supportFragmentManager,CommonlyDialog::class.simpleName)
+        //一次弹出多个
+        rootBinding.btDialogList.setOnClickListener {
+            DialogManager.apply {
+                //第一个
+                show(getDialogFragment(),supportFragmentManager,"1")
+                //第二个
+                showAtLocation(getPopup(),window.decorView, Gravity.CENTER, 0, 0)
+                //第三个
+                show(getIosDialogFragment(),supportFragmentManager,"2",1)
+                //第四个
+                show(getDialogFragment("第4个"),supportFragmentManager,"1",0)
+            }
+        }
+        //延时弹出多个
+        rootBinding.btDialogList2.setOnClickListener {
+            showList()
         }
     }
 
+    private fun showList(){
+        //弹第一个
+        DialogManager.show(getDialogFragment(),supportFragmentManager,"1")
+        //1秒后弹第二个
+        rootBinding.btDialogList2.postDelayed({
+            DialogManager.show(getIosDialogFragment(),supportFragmentManager,"2")
+        },2000)
+        //2000后弹第三个
+        rootBinding.btDialogList2.postDelayed({
+            DialogManager.showAtLocation(getPopup(),window.decorView, Gravity.CENTER, 0, 0)
+        },4000)
+    }
 
+
+    private fun getDialogFragment():CommonlyDialog{
+        return CommonlyDialog.Builder()
+                .setDialog(FullscreenBottomDialog(this))
+                .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
+                    override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
+                        view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
+                            Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()
+                            dialog?.dismiss()
+                        }
+                        view.findViewById<TextView>(R.id.txt_dialog_title).text = "底部"
+                    }
+                })
+                .build()
+    }
+
+    private fun getDialogFragment(title:String):CommonlyDialog{
+        return CommonlyDialog.Builder()
+                .setDialog(FullscreenBottomDialog(this))
+                .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
+                    override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
+                        view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
+                            Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()
+                            dialog?.dismiss()
+                        }
+                        view.findViewById<TextView>(R.id.txt_dialog_title).text = title
+                    }
+                })
+                .build()
+    }
+
+    private fun getIosDialogFragment():CommonlyDialog{
+        return CommonlyDialog.Builder()
+                .setDialog(FullScreenIosDialog(this))
+                .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
+                    override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
+                        view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
+                            Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()
+                            dialog?.dismiss()
+                        }
+                        view.findViewById<TextView>(R.id.txt_dialog_title).text = "IOS风格"
+                    }
+                })
+                .build()
+    }
+
+    private fun getPopup():PopupWindow{
+        val v = LayoutInflater.from(this@DialogActivity).inflate(R.layout.popupwindow_task_not_finish, null, false)
+        val taskPopupWindow = PopupWindow(v, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        v.findViewById<TextView>(R.id.tv_desc).setOnClickListener {
+            taskPopupWindow.dismiss()
+        }
+        taskPopupWindow.isOutsideTouchable = false
+        taskPopupWindow.isFocusable = true
+        taskPopupWindow.setBackgroundDrawable(ColorDrawable()) //getResources().getColor(R.color.f_color_000000_75)
+        taskPopupWindow.isClippingEnabled = false
+        return taskPopupWindow
+    }
 
 }

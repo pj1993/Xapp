@@ -10,7 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatDialogFragment
 
 /**
- *@Description:
+ *@Description:基础dialogFragment
  *@Author: jsync
  *@CreateDate: 2021/1/18 10:43
  */
@@ -18,7 +18,7 @@ abstract class BaseDialogFragment<T : BaseDialogFragment.Builder> : AppCompatDia
     protected lateinit var mContext: Context
     protected var rootView: View? = null
     protected var mBuilder: T? = null
-
+    private var cancelListener: OnCancelListener? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
@@ -61,6 +61,15 @@ abstract class BaseDialogFragment<T : BaseDialogFragment.Builder> : AppCompatDia
             super.onCreateDialog(savedInstanceState)
     }
 
+    public fun setOnCancelListener(l: OnCancelListener) {
+        this.cancelListener = l
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        cancelListener?.onCancel()
+        cancelListener = null
+    }
 
     public open class Builder {
         var mDialog: Dialog? = null
@@ -69,4 +78,7 @@ abstract class BaseDialogFragment<T : BaseDialogFragment.Builder> : AppCompatDia
         var mRootViewId: Int = -1
     }
 
+    public interface OnCancelListener {
+        fun onCancel()
+    }
 }

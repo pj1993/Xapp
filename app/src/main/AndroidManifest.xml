@@ -46,6 +46,7 @@
         </activity> <!-- album连续拍照测试 -->
         <activity android:name=".activity.LianXupaizhaoTest" />
         <activity android:name=".activity.LottieTestAct" />
+        <activity android:name=".activity.StockActivity"/>
     </application>
 
 </manifest>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:id="@+id/v_status"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:text="股票名称"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        app:layout_constraintTop_toBottomOf="@+id/v_status"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"/>
+
+    <View
+        android:id="@+id/v_line1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:background="#dbdbdb"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <View
+        android:id="@+id/v_line2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#dbdbdb"
+        android:layout_width="1dp"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:id="@+id/tv_qty_desc"
+        android:text="当前仓量"
+        android:textSize="20sp"
+        android:textColor="#000"
+        app:layout_constraintTop_toBottomOf="@+id/v_line1"
+        app:layout_constraintBottom_toTopOf="@+id/tv_qty"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/v_line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_qty"
+        android:text="0"
+        android:textColor="#03A9F4"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_qty_desc"
+        app:layout_constraintBottom_toBottomOf="@+id/v_line2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/v_line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_price_in_desc"
+        android:text="入仓价格："
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/v_line2"
+        app:layout_constraintTop_toBottomOf="@+id/v_line1"
+        app:layout_constraintBottom_toTopOf="@+id/tv_price_predict_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_price_in"
+        android:text="0.0"
+        android:textColor="#4CAF50"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_price_in_desc"
+        app:layout_constraintTop_toBottomOf="@+id/v_line1"
+        app:layout_constraintBottom_toTopOf="@+id/tv_price_predict_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_price_predict_desc"
+        android:text="预售价格："
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/v_line2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price_in_desc"
+        app:layout_constraintBottom_toBottomOf="@+id/v_line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_price_predict"
+        android:text="0.0"
+        android:textColor="#F44336"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_price_predict_desc"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price_in_desc"
+        app:layout_constraintBottom_toBottomOf="@+id/v_line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <View
+        app:layout_constraintLeft_toLeftOf="@+id/v_line2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/v_line2"
+        app:layout_constraintBottom_toBottomOf="@+id/v_line2"
+        android:background="#dbdbdb"
+        android:layout_width="0dp"
+        android:layout_height="1dp"/>
+
+    <View
+        android:id="@+id/v_line3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/v_line2"
+        android:background="#dbdbdb"
+        android:layout_width="0dp"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/tv_buy"
+        android:text="买 入"
+        android:gravity="center"
+        android:background="#4CAF50"
+        android:textColor="#fff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_sell"
+        app:layout_constraintTop_toBottomOf="@+id/v_line3"
+        android:layout_width="0dp"
+        android:layout_height="40dp"/>
+    <TextView
+        android:id="@+id/tv_sell"
+        android:text="卖 出"
+        android:gravity="center"
+        android:background="#F44336"
+        android:textColor="#fff"
+        app:layout_constraintLeft_toRightOf="@+id/tv_buy"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v_line3"
+        android:layout_width="0dp"
+        android:layout_height="40dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_stock_details"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sell"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_make_money"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="已赚：0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

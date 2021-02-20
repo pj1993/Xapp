@@ -3,6 +3,7 @@ package com.jsycn.pj_project.dao
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.jsycn.pj_project.entity.StockBean
+import com.jsycn.pj_project.entity.StockDetails
 
 /**
  * Author: jsync
@@ -10,7 +11,11 @@ import com.jsycn.pj_project.entity.StockBean
  * Description:
  * History:
  */
-@Database(entities = [StockBean::class],version = 4)
+const val LAST_DATABASE_VERSION = 6
+const val CURRENT_DATABASE_VERSION = LAST_DATABASE_VERSION+1
+
+@Database(entities = [StockBean::class, StockDetails::class], version = CURRENT_DATABASE_VERSION)
 abstract class StockDataBase : RoomDatabase() {
-    abstract fun stockDao():StockDao
+    abstract fun stockDao(): StockDao
+    abstract fun stockDetailsDao(): StockDetailsDao
 }

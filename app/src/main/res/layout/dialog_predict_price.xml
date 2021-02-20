@@ -20,14 +20,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="添加股票"
+            android:text="预售价格"
             android:textColor="#000"
             android:textSize="17dp"
             android:textStyle="bold" />
 
-
         <EditText
-            android:id="@+id/txt_input_name"
+            android:id="@+id/txt_input_price"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
@@ -40,25 +39,8 @@
             android:paddingRight="5dp"
             android:singleLine="true"
             android:textColor="#000000"
-            android:hint="名称"
-            android:textSize="14dp"/>
-
-        <EditText
-            android:id="@+id/txt_input_code"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/shape_bg_edit_ios"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:inputType="number"
-            android:hint="代码"
+            android:inputType="numberDecimal"
+            android:hint="价格"
             android:textSize="14dp"/>
 
         <ImageView

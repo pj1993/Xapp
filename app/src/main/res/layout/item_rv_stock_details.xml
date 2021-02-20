@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:text="买入"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"/>
+
+    <TextView
+        android:id="@+id/tv_qty"
+        android:text="0手"
+        android:textColor="#000"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_type"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"/>
+
+    <TextView
+        android:text="115.0"
+        android:gravity="center"
+        android:textColor="#000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_qty"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

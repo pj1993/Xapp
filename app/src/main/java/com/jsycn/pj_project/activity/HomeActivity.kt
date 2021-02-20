@@ -37,17 +37,6 @@ class HomeActivity : BaseActivity() {
         val normalIcon : IntArray = intArrayOf(R.drawable.ic_icon_home_normal,R.drawable.ic_icon_view_normal,R.drawable.ic_icon_tools_normal)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        //沉浸式：方案，透明状态栏，顶到头,设置占位状态栏view
-        if (Build.VERSION.SDK_INT >= 21) {
-            val decorView = window.decorView
-            val option = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-            decorView.systemUiVisibility = option
-            window.statusBarColor = Color.TRANSPARENT
-        }
-        super.onCreate(savedInstanceState)
-    }
 
     override fun initLayout(): Int {
         return R.layout.activity_home

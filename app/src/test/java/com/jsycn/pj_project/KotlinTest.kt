@@ -88,4 +88,11 @@ class KotlinTest {
     }
 
 
+    @Test
+    fun mathTest(){
+        val a = 1.0
+        val b = 2.0
+        print(a.coerceAtLeast(2.0))
+    }
+
 }

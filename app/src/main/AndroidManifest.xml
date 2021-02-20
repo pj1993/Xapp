@@ -47,6 +47,7 @@
         <activity android:name=".activity.LianXupaizhaoTest" />
         <activity android:name=".activity.LottieTestAct" />
         <activity android:name=".activity.StockActivity"/>
+        <activity android:name=".activity.StockDetailsActivity"/>
     </application>
 
 </manifest>

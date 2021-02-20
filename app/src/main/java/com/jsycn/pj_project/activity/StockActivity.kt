@@ -1,5 +1,6 @@
 package com.jsycn.pj_project.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -17,11 +18,13 @@ import com.jsycn.base.BaseActivity
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.activity.dialog.CommonlyDialog
 import com.jsycn.pj_project.activity.dialog.FullScreenIosDialog
+import com.jsycn.pj_project.dao.LAST_DATABASE_VERSION
 import com.jsycn.pj_project.dao.StockDataBase
 import com.jsycn.pj_project.entity.StockBean
 import com.jsycn.pj_project.utils.getStatusBarHeight
 import kotlinx.android.synthetic.main.activity_stock.*
 import kotlinx.coroutines.*
+import java.util.*
 
 /**
  * Author: jsync
@@ -41,24 +44,14 @@ class StockActivity : BaseActivity(){
     private lateinit var adapter: BaseQuickAdapter<StockBean,BaseViewHolder>
     private val db by lazy{
         Room.databaseBuilder(applicationContext,StockDataBase::class.java,DATA_BASE_NAME)
-                .fallbackToDestructiveMigrationFrom(3)
+                .fallbackToDestructiveMigrationFrom(LAST_DATABASE_VERSION)
                 .build()
     }
     private val scope by lazy {
         CoroutineScope(Dispatchers.Main + Job())
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        //沉浸式：方案，透明状态栏，顶到头,设置占位状态栏view
-        if (Build.VERSION.SDK_INT >= 21) {
-            val decorView = window.decorView
-            val option = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-            decorView.systemUiVisibility = option
-            window.statusBarColor = Color.TRANSPARENT
-        }
-        super.onCreate(savedInstanceState)
-    }
+
     override fun initLayout(): Int {
         return R.layout.activity_stock
     }
@@ -70,6 +63,13 @@ class StockActivity : BaseActivity(){
                 holder.setText(R.id.tv_name,item.stockName)
                         .setText(R.id.tv_code,item.stockCode)
             }
+        }
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val item = adapter.getItem(position) as? StockBean
+            val intent = Intent(this@StockActivity,StockDetailsActivity::class.java)
+            intent.putExtra("stockId",item?.stockId?:0)
+            intent.putExtra("stockName",item?.stockName)
+            startActivity(intent)
         }
         rv_stock.adapter = adapter
         tv_add_stock.setOnClickListener {
@@ -111,6 +111,7 @@ class StockActivity : BaseActivity(){
                                 scope.launch {
                                     withContext(Dispatchers.IO){
                                         db.stockDao().insertAll(StockBean(null,code,name))
+//                                        db.stockDao().insertAll(StockBean(UUID.randomUUID().toString(),code,name))
                                     }
                                     ToastUtils.showShort("新增完成!")
                                     initData(null)

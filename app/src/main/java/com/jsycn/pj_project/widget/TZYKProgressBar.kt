@@ -39,7 +39,7 @@ class TZYKProgressBar  : FrameLayout {
 
     private fun init(context: Context){
         mContext = context
-        LayoutInflater.from(mContext).inflate(R.layout.progress_tzyk,null)
+        LayoutInflater.from(mContext).inflate(R.layout.progress_tzyk,this)
 
     }
 

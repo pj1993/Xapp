@@ -92,7 +92,17 @@ class KotlinTest {
     fun mathTest(){
         val a = 1.0
         val b = 2.0
+        //两者  取大
         print(a.coerceAtLeast(2.0))
+    }
+
+    @Test
+    fun xunhuanTest(){
+        //循环，从后往前
+        val list= mutableListOf<String>("1","2","3")
+        for(i in list.size-1 downTo 0){
+            println(list[i])
+        }
     }
 
 }

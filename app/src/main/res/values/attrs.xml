@@ -3,4 +3,9 @@
     <declare-styleable name="MaxHeightScrollView">
         <attr name="maxHeight" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="MsgProgressBar">
+        <attr name="msg_color" format="color"/>
+        <attr name="msg_size" format="dimension"/>
+    </declare-styleable>
 </resources>

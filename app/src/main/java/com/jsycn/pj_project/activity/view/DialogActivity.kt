@@ -1,4 +1,4 @@
-package com.jsycn.pj_project.activity.dialog
+package com.jsycn.pj_project.activity.view
 
 import android.app.Activity
 import android.content.Context
@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.content.ContextCompat
 import com.jaeger.library.StatusBarUtil
 import com.jsycn.pj_project.R
+import com.jsycn.pj_project.activity.dialog.*
 import com.jsycn.pj_project.activity.dialog.NormalDialog.*
 import com.jsycn.pj_project.databinding.ActivityDialogBinding
 import java.lang.reflect.Method
@@ -88,11 +89,11 @@ class DialogActivity : AppCompatActivity() {
     private fun initClick(){
         //通用
         rootBinding.btCommonly.setOnClickListener {
-            getDialogFragment().show(supportFragmentManager,CommonlyDialog::class.simpleName)
+            getDialogFragment().show(supportFragmentManager, CommonlyDialog::class.simpleName)
         }
         //ios
         rootBinding.btIos.setOnClickListener {
-            getIosDialogFragment().show(supportFragmentManager,CommonlyDialog::class.simpleName)
+            getIosDialogFragment().show(supportFragmentManager, CommonlyDialog::class.simpleName)
         }
         //全屏popup
         rootBinding.btPopup.setOnClickListener {
@@ -137,13 +138,13 @@ class DialogActivity : AppCompatActivity() {
         rootBinding.btDialogList.setOnClickListener {
             DialogManager.apply {
                 //第一个
-                show(getDialogFragment(),supportFragmentManager,"1")
+                show(getDialogFragment(), supportFragmentManager, "1")
                 //第二个
-                showAtLocation(getPopup(),window.decorView, Gravity.CENTER, 0, 0)
+                showAtLocation(getPopup(), window.decorView, Gravity.CENTER, 0, 0)
                 //第三个
-                show(getIosDialogFragment(),supportFragmentManager,"2",1)
+                show(getIosDialogFragment(), supportFragmentManager, "2", 1)
                 //第四个
-                show(getDialogFragment("第4个"),supportFragmentManager,"1",0)
+                show(getDialogFragment("第4个"), supportFragmentManager, "1", 0)
             }
         }
         //延时弹出多个
@@ -154,22 +155,22 @@ class DialogActivity : AppCompatActivity() {
 
     private fun showList(){
         //弹第一个
-        DialogManager.show(getDialogFragment(),supportFragmentManager,"1")
+        DialogManager.show(getDialogFragment(), supportFragmentManager, "1")
         //1秒后弹第二个
         rootBinding.btDialogList2.postDelayed({
-            DialogManager.show(getIosDialogFragment(),supportFragmentManager,"2")
+            DialogManager.show(getIosDialogFragment(), supportFragmentManager, "2")
         },2000)
         //2000后弹第三个
         rootBinding.btDialogList2.postDelayed({
-            DialogManager.showAtLocation(getPopup(),window.decorView, Gravity.CENTER, 0, 0)
+            DialogManager.showAtLocation(getPopup(), window.decorView, Gravity.CENTER, 0, 0)
         },4000)
     }
 
 
-    private fun getDialogFragment():CommonlyDialog{
+    private fun getDialogFragment(): CommonlyDialog {
         return CommonlyDialog.Builder()
                 .setDialog(FullscreenBottomDialog(this))
-                .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
+                .setRootViewId(R.layout.dialog_fragment_commonly,object : CommonlyDialog.OnSetViewCallBack {
                     override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
                         view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
                             Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()
@@ -181,10 +182,10 @@ class DialogActivity : AppCompatActivity() {
                 .build()
     }
 
-    private fun getDialogFragment(title:String):CommonlyDialog{
+    private fun getDialogFragment(title:String): CommonlyDialog {
         return CommonlyDialog.Builder()
                 .setDialog(FullscreenBottomDialog(this))
-                .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
+                .setRootViewId(R.layout.dialog_fragment_commonly,object : CommonlyDialog.OnSetViewCallBack {
                     override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
                         view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
                             Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()
@@ -196,10 +197,10 @@ class DialogActivity : AppCompatActivity() {
                 .build()
     }
 
-    private fun getIosDialogFragment():CommonlyDialog{
+    private fun getIosDialogFragment(): CommonlyDialog {
         return CommonlyDialog.Builder()
                 .setDialog(FullScreenIosDialog(this))
-                .setRootViewId(R.layout.dialog_fragment_commonly,object :CommonlyDialog.OnSetViewCallBack{
+                .setRootViewId(R.layout.dialog_fragment_commonly,object : CommonlyDialog.OnSetViewCallBack {
                     override fun onViewCreate(view: View, dialog: AppCompatDialogFragment?) {
                         view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
                             Toast.makeText(this@DialogActivity,"点到我了！",Toast.LENGTH_SHORT).show()

@@ -1,6 +1,9 @@
 package com.jsycn.pj_project.utils
 
-import java.util.Objects.isNull
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.TypedValue
 
 /**
  * Author: jsync
@@ -37,6 +40,30 @@ fun parseDouble(obj: Any?): Double {
             0.0
         }
     }
+}
+
+fun dp2px(dp: Float): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().displayMetrics)
+}
+
+fun sp2px(sp: Float): Float {
+    val fontScale = Resources.getSystem().displayMetrics.scaledDensity
+    return (sp * fontScale + 0.5f)
+}
+
+
+fun getBitmap(resId: Int, width: Int, res: Resources?): Bitmap? {
+    val options = BitmapFactory.Options()
+    options.inJustDecodeBounds = true
+    BitmapFactory.decodeResource(res, resId, options)
+    options.inJustDecodeBounds = false
+    options.inDensity = options.outWidth
+    options.inTargetDensity = width
+    return BitmapFactory.decodeResource(res, resId, options)
+}
+
+fun getZForCamera(): Float {
+    return -6 * Resources.getSystem().displayMetrics.density
 }
 class MyUtils {
 

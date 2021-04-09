@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jsycn.pj_project.activity.HomeActivity;
-import static com.jsycn.pj_project.activity.dialog.DialogActivityKt.setFullScreen;
+import static com.jsycn.pj_project.activity.view.DialogActivityKt.setFullScreen;
 
 
 /**

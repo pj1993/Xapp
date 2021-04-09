@@ -83,7 +83,7 @@ class StockDetailsActivity : BaseActivity(){
         stockId = intent.getIntExtra("stockId",-1)
         tv_title.text = intent.getStringExtra("stockName")
         //预售价格
-        tv_price_predict.text = SPUtils.getInstance().getString("predict_price")
+        tv_price_predict.text = SPUtils.getInstance().getString(stockId.toString())
         if (stockId == -1) return
         getStockDetails()
     }
@@ -178,7 +178,7 @@ class StockDetailsActivity : BaseActivity(){
                         view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
                             val price = view.findViewById<EditText>(R.id.txt_input_price).text.toString()
                             tv_price_predict.text = price
-                            SPUtils.getInstance().put("predict_price",price)
+                            SPUtils.getInstance().put(stockId.toString(),price)
                             dialog?.dismiss()
                         }
                     }

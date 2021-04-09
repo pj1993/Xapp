@@ -2,8 +2,12 @@ package com.jsycn.pj_project;
 
 import android.app.Activity;
 import android.app.Application;
+import android.util.Log;
 
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
 
@@ -35,8 +39,28 @@ public class MApplication extends Application {
         FloatingCtrl.setSystemFloat(false);
         FloatingCtrl.install(this);
         DoraemonKit.install(this);
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(new ApplicationObserver());
     }
 
+    /**
+     * 前后台监听
+     */
+    public static class ApplicationObserver implements LifecycleObserver {
+        private String tag = "ApplicationObserver";
+        @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        public void onCreate(){
 
+        }
+        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+        public void onResume(){
+            Log.d(tag,"前台");
+        }
+        //有延迟
+        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+        public void onStop(){
+            Log.d(tag,"后台");
+        }
+
+    }
 
 }

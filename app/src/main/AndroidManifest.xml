@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/icon_lauch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.dialog.DialogActivity"/>
+        <activity android:name=".activity.view.DialogActivity"/>
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.LeakCanaryActivity2" />
         <activity android:name=".activity.LeakCanaryActivity" />
@@ -48,6 +48,7 @@
         <activity android:name=".activity.LottieTestAct" />
         <activity android:name=".activity.StockActivity"/>
         <activity android:name=".activity.StockDetailsActivity"/>
+        <activity android:name=".activity.view.ProgressActivity"/>
     </application>
 
 </manifest>

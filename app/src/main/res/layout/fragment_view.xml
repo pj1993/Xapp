@@ -49,4 +49,11 @@
         android:text="Dialog弹窗"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
+    <Button
+        android:id="@+id/bt_progress"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="自定义进度条"
+        app:layout_constraintTop_toBottomOf="@+id/bt_popup" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

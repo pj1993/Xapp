@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SeekBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="7.5dp"
+        android:max="100"
+        android:progress="80"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="8dp"
+        android:progressDrawable="@drawable/my_progress_bar"
+        android:visibility="visible"/>
+
+    <com.jsycn.pj_project.widget.MyProgressBar
+        android:id="@+id/pb"
+        android:tooltipText="dasd"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:progressDrawable="@drawable/pb_my_style"
+        app:msg_size="10sp"
+        app:msg_color="#FF0000"
+        android:layout_width="100dp"
+        android:layout_height="13dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

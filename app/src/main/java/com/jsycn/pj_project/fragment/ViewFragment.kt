@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
-import com.jsycn.pj_project.R
-import com.jsycn.pj_project.activity.dialog.DialogActivity
+import com.jsycn.pj_project.activity.view.DialogActivity
+import com.jsycn.pj_project.activity.view.ProgressActivity
 import com.jsycn.pj_project.databinding.FragmentViewBinding
 import com.jsycn.pj_project.utils.getStatusBarHeight
 import com.jsycn.pj_project.utils.setAndroidNativeLightStatusBar
@@ -35,7 +34,7 @@ class ViewFragment: LazyFragmentOld() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rootBind.btPopup.setOnClickListener {
-            startActivity(Intent(activity,DialogActivity::class.java))
+            startActivity(Intent(activity, DialogActivity::class.java))
         }
         activity?.let {
             getStatusBarHeight(it) { height ->
@@ -45,6 +44,9 @@ class ViewFragment: LazyFragmentOld() {
                 v_status.visibility = View.VISIBLE
             }
             setAndroidNativeLightStatusBar(it, true)
+        }
+        rootBind.btProgress.setOnClickListener {
+            startActivity(Intent(activity, ProgressActivity::class.java))
         }
     }
 

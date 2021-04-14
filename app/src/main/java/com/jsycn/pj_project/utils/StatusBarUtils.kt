@@ -2,6 +2,7 @@ package com.jsycn.pj_project.utils
 
 import android.R
 import android.app.Activity
+import android.content.Context
 import android.os.Build
 import android.view.View
 import android.view.WindowManager
@@ -12,12 +13,12 @@ import com.blankj.utilcode.util.SPUtils
  *@Author: jsync
  *@CreateDate: 2021/1/19 18:13
  */
-
+var mStatusBarHeight:Int=0
 /**
  * 获取状态栏高度
  */
 fun getStatusBarHeight(activity: Activity, block:(Int)->Unit ={}) {
-    var statusBarHeight: Int = SPUtils.getInstance().getInt(KEY_STATUS_BAR_HEIGHT)
+    var statusBarHeight: Int = mStatusBarHeight
     if (statusBarHeight <= 0) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             getStatusBarHeightCompatP(activity, block)
@@ -40,10 +41,7 @@ fun getStatusBarHeightCompatP(activity: Activity, block:(Int)->Unit ={}) {
                 val displayCutout = insets.displayCutout
                 if (displayCutout != null) {
                     val displayCutoutHeight = displayCutout.safeInsetTop
-                    /*if(displayCutoutHeight <= 0){
-                                        displayCutoutHeight = getStatusBarHeightNormal(activity);
-                                    }*/
-                    SPUtils.getInstance().put(KEY_STATUS_BAR_HEIGHT, displayCutoutHeight)
+                    mStatusBarHeight = displayCutoutHeight
                     block(displayCutoutHeight)
                 } else {
                     val statusBarHeight: Int = getStatusBarHeightNormal(activity)
@@ -64,7 +62,7 @@ fun getStatusBarHeightNormal(activity: Activity): Int {
         val resourceId = activity.resources.getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {
             statusBarHeight = activity.resources.getDimensionPixelSize(resourceId)
-            SPUtils.getInstance().put(KEY_STATUS_BAR_HEIGHT, statusBarHeight)
+            mStatusBarHeight = statusBarHeight
         }
     }
     return statusBarHeight
@@ -83,6 +81,8 @@ fun setAndroidNativeLightStatusBar(activity: Activity, dark: Boolean) {
         }
     }
 }
+
+
 
 class StatusBarUtils {
 }

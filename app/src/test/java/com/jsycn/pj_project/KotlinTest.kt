@@ -1,6 +1,7 @@
 package com.jsycn.pj_project
 
 import org.junit.Test
+import kotlin.math.sqrt
 
 /**
  *@Description:
@@ -103,6 +104,19 @@ class KotlinTest {
         for(i in list.size-1 downTo 0){
             println(list[i])
         }
+    }
+    @Test
+    fun shuxue(){
+//        //1
+//        print("${sqrt(2f)}")
+//        //2
+//        val d = doubleArrayOf(0.1,2.2,3.3,5.5,2.5)
+//        d.sort()//array排序没返回值，list的排序有返回值
+//        print(d)
+        //3
+        var ss = "我们是冠军最军最饿"
+//        val s = java.lang.StringBuilder(ss).insert(4, "\n").toString()
+        print(ss.substring(0,8))
     }
 
 }

@@ -64,10 +64,17 @@
         app:layout_constraintTop_toBottomOf="@+id/bt_countDown_cancel" />
 
     <Button
+        android:id="@+id/bt_mvvm"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="mvvm"
+        app:layout_constraintTop_toBottomOf="@+id/bt_zcdh" />
+
+    <Button
         android:id="@+id/bt_gp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="股票"
-        app:layout_constraintTop_toBottomOf="@+id/bt_zcdh" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_mvvm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

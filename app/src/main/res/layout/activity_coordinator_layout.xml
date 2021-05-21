@@ -1,49 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smart.refresh.layout.SmartRefreshLayout
+    android:id="@+id/srl_all"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.CoordinatorLayoutActivity">
+    android:layout_height="match_parent">
 
-    <!--头部-->
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        tools:context=".activity.CoordinatorLayoutActivity">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        <!--头部-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl_head"
+            app:layout_behavior=".behavior.AppBarLayoutBehavior"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher"
-                app:layout_collapseMode="parallax" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"
+                    app:layout_collapseMode="parallax" />
 
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="#5FF"-->
-<!--            app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />-->
+            <View
+                android:id="@+id/v_header"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#5FF"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
 
 
-    </com.google.android.material.appbar.AppBarLayout>
-    <!--可滑动部分-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    <View
-        app:layout_behavior=".behavior.MyBehavior"
-        android:background="#FF00FF"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/srl_rv"
+            android:layout_width="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_height="match_parent">
+            <!--可滑动部分-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!--    <View-->
+            <!--        app:layout_behavior=".behavior.MyBehavior"-->
+            <!--        android:background="#FF00FF"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="50dp"/>-->
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
 

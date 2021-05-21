@@ -2,6 +2,8 @@ package com.jsycn.pj_project;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 
 
@@ -13,6 +15,14 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.didichuxing.doraemonkit.DoraemonKit;
 import com.jsyncpj.floating.FloatingCtrl;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshFooter;
+import com.scwang.smart.refresh.layout.api.RefreshHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator;
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshHeaderCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,4 +73,26 @@ public class MApplication extends Application {
 
     }
 
+    static {
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
+            @Override
+            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
+                layout.setPrimaryColorsId(R.color.white, R.color.black);//全局设置主题颜色
+                layout.setEnableAutoLoadMore(false);
+                layout.setEnableOverScrollBounce(false);
+                return new ClassicsHeader(context);//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
+            }
+        });
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
+            @Override
+            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
+                //指定为经典Footer，默认是 BallPulseFooter
+                ClassicsFooter classicsFooter = new ClassicsFooter(context).setDrawableSize(20);
+                classicsFooter.setAccentColor(Color.parseColor("#000000"));//设置强调颜色
+                return classicsFooter;
+            }
+        });
+    }
 }

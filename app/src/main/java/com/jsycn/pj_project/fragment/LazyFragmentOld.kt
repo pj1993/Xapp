@@ -56,10 +56,22 @@ abstract class LazyFragmentOld : BaseFragment() {
     open fun onVisible(){
 
     }
-
+    /**
+     * 使用 add+show+hide时会触发
+     */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         isVisibleToUser = !hidden
+        judgeLazyInit()
+    }
+
+    /**
+     * viewPager+fragment时触发
+     */
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        this.isVisibleToUser = isVisibleToUser
+        isCallUserVisibleHint = true
         judgeLazyInit()
     }
 
@@ -69,13 +81,6 @@ abstract class LazyFragmentOld : BaseFragment() {
         isVisibleToUser = false
         isCallUserVisibleHint = false
         isCallResume = false
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleToUser = isVisibleToUser
-        isCallUserVisibleHint = true
-        judgeLazyInit()
     }
 
     /**

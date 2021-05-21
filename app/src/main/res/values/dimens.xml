@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tzyk_progress_height">13dp</dimen>
+    <dimen name="tzyk_progress_height_radius">6.5dp</dimen>
+    <dimen name="tzyk_progress_height_padding">3dp</dimen>
+</resources>

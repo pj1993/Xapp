@@ -4,6 +4,23 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <com.jsycn.pj_project.widget.view.StopwatchView
+        android:id="@+id/swv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#EDEDED"
+        android:layout_width="94dp"
+        android:layout_height="73dp"/>
+    <com.jsycn.pj_project.widget.TZYKProgressBar
+        android:id="@+id/marketStyleProgress"
+        app:layout_constraintTop_toBottomOf="@+id/swv"
+        android:layout_marginTop="12pt"
+        android:layout_marginHorizontal="30pt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <SeekBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"

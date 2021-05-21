@@ -27,6 +27,6 @@ class ProgressActivity : AppCompatActivity(){
     }
 
     private fun initClick(){
-
+        rootBinding.marketStyleProgress.setProgressWithAnimator(80)
     }
 }

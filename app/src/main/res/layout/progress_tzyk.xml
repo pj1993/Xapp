@@ -35,15 +35,26 @@
         android:id="@+id/tvCurrent"
         tools:text="80"
         app:layout_constraintTop_toBottomOf="@+id/pbM"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/vThumb"
+        app:layout_constraintRight_toRightOf="@+id/vThumb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <View
+    <com.jsycn.pj_project.widget.view.CircleView
         android:id="@+id/vThumb"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_width="20dp"
-        android:layout_height="20dp"/>
+        app:bg_color="@color/color_market_style_progress_bg"
+        android:layout_width="22dp"
+        android:layout_height="22dp"/>
+
+    <com.jsycn.pj_project.widget.view.CircleView
+        android:id="@+id/vThumbColor"
+        app:layout_constraintLeft_toLeftOf="@+id/vThumb"
+        app:layout_constraintRight_toRightOf="@+id/vThumb"
+        app:layout_constraintTop_toTopOf="@+id/vThumb"
+        app:layout_constraintBottom_toBottomOf="@+id/vThumb"
+        android:layout_width="16dp"
+        android:layout_height="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

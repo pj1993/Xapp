@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 /**
- *@Description:日子类
+ *@Description:日志类
  * Androidx 中fragment懒加载实现方式
  * https://www.jianshu.com/p/2201a107d5b5?utm_campaign=hugo
  *@Author: jsync

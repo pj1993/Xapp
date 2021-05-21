@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import com.jsycn.pj_project.MainActivity
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.activity.StockActivity
+import com.jsycn.pj_project.mvvm.test.TestMVVMActivity
+import com.jsycn.pj_project.mvvm.test.TestMVVMFragment
 import com.jsycn.pj_project.utils.getStatusBarHeight
 import com.jsycn.pj_project.utils.setAndroidNativeLightStatusBar
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -48,6 +50,13 @@ class HomeFragment : LazyFragmentOld() {
         //股票
         bt_gp.setOnClickListener {
             startActivity(Intent(context,StockActivity::class.java))
+        }
+        bt_countDown_cancel.setOnClickListener {
+            startActivity(Intent(activity,MainActivity::class.java))
+        }
+        //mvvm
+        bt_mvvm.setOnClickListener {
+            startActivity(Intent(context,TestMVVMActivity::class.java))
         }
     }
 

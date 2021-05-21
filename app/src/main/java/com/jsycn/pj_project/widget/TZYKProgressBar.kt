@@ -10,7 +10,10 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import com.jsycn.pj_project.R
+import com.jsycn.pj_project.widget.view.CircleView
 
 /**
  *@Description:
@@ -24,6 +27,7 @@ class TZYKProgressBar  : FrameLayout {
     private lateinit var tvMax :TextView
     private lateinit var tvCurrent :TextView
     private lateinit var vThumb : View
+    private lateinit var vThumbColor: CircleView
 
     constructor(context: Context):this(context,null){
 
@@ -50,11 +54,11 @@ class TZYKProgressBar  : FrameLayout {
         tvMax = findViewById(R.id.tvMax)
         tvCurrent = findViewById(R.id.tvCurrent)
         vThumb = findViewById(R.id.vThumb)
+        vThumbColor = findViewById(R.id.vThumbColor)
     }
     @Synchronized
-    public fun setProgress(progress:Int){
+    public fun setProgressWithAnimator(progress:Int){
         getAnimator()?.setIntValues(pbM.progress,progress)
-//        pbM.progress = progress
         getAnimator()?.start()
     }
 
@@ -64,8 +68,34 @@ class TZYKProgressBar  : FrameLayout {
         }else{
             tvCurrent.visibility = View.VISIBLE
         }
+        //文字
+        tvCurrent.text = "${pbM.progress}"
+        //文字颜色
+        val p = (pbM.progress.toFloat() / pbM.max).run {
+            if (this<0)
+                return@run 0f
+            if (this>1)
+                return@run 1f
+            return@run this
+        }
+        val color = ColorUtils.blendARGB(ContextCompat.getColor(mContext, R.color.color_market_style_progress_start),
+                ContextCompat.getColor(mContext, R.color.color_market_style_progress_end), p)
+        tvCurrent.setTextColor(color)
+        //thumb颜色
+        vThumbColor.setColor(color)
     }
 
+    public fun setProgress(progress: Int) {
+        pbM.progress = progress
+        //移动thumb
+        //总长度是width-thumb的宽度
+        val w: Float = (width - dp2px(22f)) * (progress.toFloat()) / pbM.max
+        val lpV = vThumb.layoutParams as ConstraintLayout.LayoutParams
+        lpV.leftMargin = w.toInt()
+        vThumb.layoutParams = lpV
+        refreshText()
+        invalidate()
+    }
 
     private var animator: ValueAnimator? = null
 
@@ -73,23 +103,14 @@ class TZYKProgressBar  : FrameLayout {
         if (animator == null) {
             animator = ValueAnimator.ofInt()
             animator!!.addUpdateListener { animation ->
-                pbM.progress = (animation.animatedValue as Int)
-                //移动thumb和文本
-                val w :Float= width * (animation.animatedValue as Float)/pbM.max
-                val lpV =vThumb.layoutParams as ConstraintLayout.LayoutParams
-                lpV.leftMargin = w.toInt()
-                vThumb.layoutParams = lpV
-                //文本
-                val lpT = tvCurrent.layoutParams as ConstraintLayout.LayoutParams
-                lpT.leftMargin = w.toInt()
-                tvCurrent.layoutParams = lpT
-                refreshText()
+                val p = animation.animatedValue as Int
+                setProgress(p)
             }
         }
         return animator
     }
 
-    fun dp2px(dp: Float): Float {
+    private fun dp2px(dp: Float): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().displayMetrics)
     }
 }

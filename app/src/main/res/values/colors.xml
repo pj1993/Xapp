@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#000000</color>
 
 
 
@@ -25,4 +27,11 @@
     <color name="ios_dialog_split_light">#2c000000</color>
     <color name="ios_dialog_split_dark">#4e4e50</color>
     <color name="text_color_3">#B95F02</color>
+
+    <!--    市场风格进度条颜色-->
+    <color name="color_D42541">#D42541</color>
+    <color name="color_market_style_progress_start">#FFEB3B</color>
+    <color name="color_market_style_progress_center">#FF9800</color>
+    <color name="color_market_style_progress_end">#FF5722</color>
+    <color name="color_market_style_progress_bg">#F4F4F4</color>
 </resources>

@@ -49,6 +49,7 @@
         <activity android:name=".activity.StockActivity"/>
         <activity android:name=".activity.StockDetailsActivity"/>
         <activity android:name=".activity.view.ProgressActivity"/>
+        <activity android:name=".mvvm.test.TestMVVMActivity"/>
     </application>
 
 </manifest>

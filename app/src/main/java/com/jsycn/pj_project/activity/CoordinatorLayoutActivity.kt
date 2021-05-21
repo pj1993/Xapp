@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.google.android.material.appbar.AppBarLayout
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.behavior.AppBarLayoutBehavior
+import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -62,12 +63,13 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
                     showHead(true)
                     hasShowHead = true
                 }
-                LogUtils.d("scroll_height","滑动时：${hasShowHead}")
+//                LogUtils.d("scroll_height","滑动时：${hasShowHead}")
             }
             override fun onHeaderReleased(header: RefreshHeader?, headerHeight: Int, maxDragHeight: Int) {
-                if (hasShowHead){
+//                if (hasShowHead){
 //                    srl_rv.finishRefresh()
-                }
+//                    srl_rv.refreshState(RefreshState.None)
+//                }
             }
             override fun onHeaderStartAnimator(header: RefreshHeader?, headerHeight: Int, maxDragHeight: Int) {
 
@@ -85,7 +87,7 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
                     srl_rv.finishRefresh(0)
                 }else{
                     //常规刷新
-                    srl_rv.finishRefresh()
+                    srl_rv.finishRefresh(900)
                 }
             }
 
@@ -103,6 +105,14 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
             //头部锁起来
             if (b is AppBarLayoutBehavior){
                 b.isVerticalOffsetEnabled = show
+            }
+        }
+        val h = srl_rv.refreshHeader
+        if (h is ClassicsHeader){
+            if (show){//强拉出头部
+                h.setFinishDuration(0)
+            }else{//关闭头部
+                h.setFinishDuration(500)
             }
         }
         srl_rv.setEnableRefresh(!show)

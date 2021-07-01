@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
 
-            <com.jsycn.pj_project.mvvm.test.TestComponent
+            <com.jsycn.pj_project.core.mvvm.test.TestComponent
                 android:id="@+id/cpTest"
                 app:layout_constraintTop_toBottomOf="@+id/v_top"
                 android:layout_width="match_parent"

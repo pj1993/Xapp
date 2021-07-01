@@ -2,6 +2,8 @@ package com.jsycn.pj_project
 
 import org.junit.Test
 import kotlin.math.sqrt
+import kotlin.properties.ReadOnlyProperty
+import kotlin.reflect.KProperty
 
 /**
  *@Description:
@@ -118,5 +120,98 @@ class KotlinTest {
 //        val s = java.lang.StringBuilder(ss).insert(4, "\n").toString()
         print(ss.substring(0,8))
     }
+
+
+    //-------------------------Kotlin委托----------------------------------------------------
+    //博客地址--https://juejin.cn/post/6958346113552220173
+    //1类委托
+    //基础接口
+    interface Base{
+        fun print()
+    }
+    //基础对象
+    class BaseImpl(val x:Int):Base{
+        override fun print() {
+            print(x)
+        }
+    }
+    //被委托类(Derived的方法都交给了b里面的方法处理，有点像接口定义的规则类)
+    class Derived(b:Base):Base by b
+    @Test
+    fun testByjz(){
+        //委托
+        val b = BaseImpl(10)
+        Derived(b).print()
+        //原始写法
+        val y:Base =BaseImpl(12)
+        y.print()
+    }
+
+    //2属性委托(属性委托的对象里面方法用到关键字operator)
+//    基础类不需要实现任何接口，但必须提供 getValue() 方法，
+//    如果是委托可变属性，还需要提供 setValue()。在每个属性委托的实现的背后，
+//    Kotlin 编译器都会生成辅助属性并委托给它。 例如，对于属性 prop，会生成「辅助属性」 prop$delegate。
+//    而 prop 的 getter() 和 setter() 方法只是简单地委托给辅助属性的 getValue() 和 setValue() 处理。
+
+    class Example{
+        //被委托属性
+        var prop:String by Delegate()//基础对象
+    }
+    //基础类
+    class Delegate{
+        private var realValue:String ="彭"
+        operator fun getValue(thisRef:Any?,property:KProperty<*>):String{
+            println("getValue")
+            return realValue
+        }
+        operator fun setValue(thisRef:Any?,property:KProperty<*>,value:String){
+            println("setValue")
+            realValue = value
+        }
+    }
+    @Test
+    fun testByshuxing(){
+        //委托写法
+        val e = Example()
+        println(e.prop)// 最终调用 Delegate#getValue()
+        e.prop = "Peng"// 最终调用 Delegate#setValue()
+        println(e.prop)
+        //原始写法
+        //感觉就是给这个属性加了个getter和setter方法，这个有什么用呢？
+    }
+
+    //3局部变量委托(没啥特别的)
+    fun testjubu(args: Array<String>) {
+        val lazyValue: String by lazy {
+            println("Lazy Init Completed!")
+            "Hello World."
+        }
+        if (true) {
+            println(lazyValue) // 首次调用
+            println(lazyValue) // 后续调用
+
+        }
+    }
+
+    //kotlin中常用的委托lazy,ObservableProperty,使用 Map 存储属性值
+    val lazyValue: String by lazy {
+        println("Lazy Init Completed!")
+        "Hello World."
+    }
+
+    fun testByLazy() {
+        println(lazyValue) // 首次调用
+        println(lazyValue) // 后续调用
+    }
+//    输出：
+//    Lazy Init Completed!
+//    Hello World.
+//    Hello World.
+
+//自带的快速实现代理
+val name by ReadOnlyProperty<Any?, String> { thisRef, property -> "peng" }
+
+    //-------------------------Kotlin委托----------------------------------------------------
+
 
 }

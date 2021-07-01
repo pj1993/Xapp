@@ -17,7 +17,7 @@
 
     </androidx.core.widget.NestedScrollView>-->
 
-    <com.jsycn.pj_project.widget.webview.NestedScrollWebView
+    <com.jsycn.pj_project.ui.widget.webview.NestedScrollWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.jsycn.pj_project.widget.view.StopwatchView
+    <com.jsycn.pj_project.ui.widget.view.StopwatchView
         android:id="@+id/swv"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -13,7 +13,7 @@
         android:background="#EDEDED"
         android:layout_width="94dp"
         android:layout_height="73dp"/>
-    <com.jsycn.pj_project.widget.TZYKProgressBar
+    <com.jsycn.pj_project.ui.widget.TZYKProgressBar
         android:id="@+id/marketStyleProgress"
         app:layout_constraintTop_toBottomOf="@+id/swv"
         android:layout_marginTop="12pt"
@@ -36,7 +36,7 @@
         android:progressDrawable="@drawable/my_progress_bar"
         android:visibility="visible"/>
 
-    <com.jsycn.pj_project.widget.MyProgressBar
+    <com.jsycn.pj_project.ui.widget.MyProgressBar
         android:id="@+id/pb"
         android:tooltipText="dasd"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"

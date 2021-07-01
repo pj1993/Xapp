@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.jsycn.pj_project.widget.MyProgressBar
+    <com.jsycn.pj_project.ui.widget.MyProgressBar
         android:id="@+id/pbM"
         android:layout_marginTop="2dp"
         android:progressDrawable="@drawable/pb_my_style"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <com.jsycn.pj_project.widget.view.CircleView
+    <com.jsycn.pj_project.ui.widget.view.CircleView
         android:id="@+id/vThumb"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -48,7 +48,7 @@
         android:layout_width="22dp"
         android:layout_height="22dp"/>
 
-    <com.jsycn.pj_project.widget.view.CircleView
+    <com.jsycn.pj_project.ui.widget.view.CircleView
         android:id="@+id/vThumbColor"
         app:layout_constraintLeft_toLeftOf="@+id/vThumb"
         app:layout_constraintRight_toRightOf="@+id/vThumb"

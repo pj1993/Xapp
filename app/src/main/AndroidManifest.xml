@@ -9,19 +9,19 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name=".MApplication"
+        android:name=".ui.MApplication"
         android:allowBackup="true"
         android:icon="@mipmap/icon_lauch"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon_lauch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.view.DialogActivity"/>
-        <activity android:name=".activity.HomeActivity" />
-        <activity android:name=".activity.LeakCanaryActivity2" />
-        <activity android:name=".activity.LeakCanaryActivity" />
-        <activity android:name=".activity.CoordinatorLayoutActivity" />
-        <activity android:name=".activity.SmartRefreshTestActivity" />
+        <activity android:name="com.jsycn.pj_project.ui.activity.view.DialogActivity"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.HomeActivity" />
+        <activity android:name="com.jsycn.pj_project.ui.activity.LeakCanaryActivity2" />
+        <activity android:name="com.jsycn.pj_project.ui.activity.LeakCanaryActivity" />
+        <activity android:name="com.jsycn.pj_project.ui.activity.CoordinatorLayoutActivity" />
+        <activity android:name="com.jsycn.pj_project.ui.activity.SmartRefreshTestActivity" />
         <activity
             android:name=".testcls.activitymode.DModeAct"
             android:launchMode="singleInstance" />
@@ -34,9 +34,9 @@
             android:launchMode="singleTask" />
         <activity android:name=".testcls.activitymode.AModeAct" />
         <activity android:name=".testcls.fragmenttest.FragmentLifeTestActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,12 +44,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- album连续拍照测试 -->
-        <activity android:name=".activity.LianXupaizhaoTest" />
-        <activity android:name=".activity.LottieTestAct" />
-        <activity android:name=".activity.StockActivity"/>
-        <activity android:name=".activity.StockDetailsActivity"/>
-        <activity android:name=".activity.view.ProgressActivity"/>
-        <activity android:name=".mvvm.test.TestMVVMActivity"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.LianXupaizhaoTest" />
+        <activity android:name="com.jsycn.pj_project.ui.activity.LottieTestAct" />
+        <activity android:name="com.jsycn.pj_project.ui.activity.StockActivity"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.StockDetailsActivity"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.view.ProgressActivity"/>
+        <activity android:name="com.jsycn.pj_project.core.mvvm.test.TestMVVMActivity"/>
     </application>
 
 </manifest>

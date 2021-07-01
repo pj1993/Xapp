@@ -1,10 +1,12 @@
 package com.jsycn.pj_project.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.blankj.utilcode.util.LogUtils
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
@@ -47,5 +49,15 @@ class ToolsFragment: LazyFragmentOld() {
         activity?.let {
             setAndroidNativeLightStatusBar(it, false)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ToolsFragment","onResume")
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        Log.d("ToolsFragment","setUserVisibleHint")
     }
 }

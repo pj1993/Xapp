@@ -108,7 +108,7 @@ class HomeActivity : BaseActivity() {
     }
 
 
-    class HomePagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    class HomePagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
         val data = mutableListOf<Fragment>()
 
         public fun addData(f:Fragment){

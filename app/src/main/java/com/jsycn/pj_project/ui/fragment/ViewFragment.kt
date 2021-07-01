@@ -2,10 +2,12 @@ package com.jsycn.pj_project.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.blankj.utilcode.util.LogUtils
 import com.jsycn.pj_project.ui.activity.view.DialogActivity
 import com.jsycn.pj_project.ui.activity.view.ProgressActivity
 import com.jsycn.pj_project.databinding.FragmentViewBinding
@@ -54,5 +56,15 @@ class ViewFragment: LazyFragmentOld() {
         activity?.let {
             setAndroidNativeLightStatusBar(it, true)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ViewFragment","onResume")
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        Log.d("ViewFragment","setUserVisibleHint")
     }
 }

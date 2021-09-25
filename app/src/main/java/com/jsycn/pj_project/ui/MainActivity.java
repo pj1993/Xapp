@@ -25,7 +25,7 @@ import com.jsycn.pj_project.ui.widget.MessageFloatingView;
 import com.jsyncpj.floating.FloatingCtrl;
 import com.jsyncpj.floating.model.FloatingIntent;
 
-
+//测试提交
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv_handler;

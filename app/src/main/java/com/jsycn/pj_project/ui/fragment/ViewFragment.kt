@@ -35,9 +35,6 @@ class ViewFragment: LazyFragmentOld() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rootBind.btPopup.setOnClickListener {
-            startActivity(Intent(activity, DialogActivity::class.java))
-        }
         activity?.let {
             getStatusBarHeight(it) { height ->
                 val params = v_status.layoutParams as ConstraintLayout.LayoutParams
@@ -45,7 +42,10 @@ class ViewFragment: LazyFragmentOld() {
                 v_status.layoutParams = params
                 v_status.visibility = View.VISIBLE
             }
-            setAndroidNativeLightStatusBar(it, true)
+        }
+        setAndroidNativeLightStatusBar(requireActivity(), true)
+        rootBind.btPopup.setOnClickListener {
+            startActivity(Intent(activity, DialogActivity::class.java))
         }
         rootBind.btProgress.setOnClickListener {
             startActivity(Intent(activity, ProgressActivity::class.java))

@@ -7,7 +7,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jsycn.pj_project.ui.activity.HomeActivity;
+
+import static com.jsycn.pj_project.core.utils.StatusBarUtilsKt.getStatusBarHeight;
 import static com.jsycn.pj_project.ui.activity.view.DialogActivityKt.setFullScreen;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 
 /**
@@ -32,6 +37,13 @@ public class SplashActivity extends AppCompatActivity {
             }
         }.start();
         setFullScreen(this);
+
+        //获取状态栏高度
+        getStatusBarHeight(this, integer -> {
+            //获取到状态栏高度
+
+            return null;
+        });
     }
 
 }

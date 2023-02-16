@@ -25,6 +25,7 @@ fun getStatusBarHeight(activity: Activity, block:(Int)->Unit ={}) {
             statusBarHeight = getStatusBarHeightNormal(activity)
         }
     }
+    //保存到本地，一般一个手机的状态栏高度是不会变的，
     block(statusBarHeight)
 }
 

@@ -33,8 +33,8 @@ class ToolsFragment: LazyFragmentOld() {
                 v_status.layoutParams = params
                 v_status.visibility = View.VISIBLE
             }
-            setAndroidNativeLightStatusBar(it, false)
         }
+        setAndroidNativeLightStatusBar(requireActivity(), true)
     }
 
     override fun lazyInit() {

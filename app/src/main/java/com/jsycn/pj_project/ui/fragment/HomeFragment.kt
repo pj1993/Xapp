@@ -44,8 +44,9 @@ class HomeFragment : LazyFragmentOld() {
                 v_status.layoutParams = params
                 v_status.visibility = View.VISIBLE
             }
-            setAndroidNativeLightStatusBar(it, true)
         }
+        setAndroidNativeLightStatusBar(requireActivity(), true)
+
         //股票
         bt_gp.setOnClickListener {
             startActivity(Intent(context,StockActivity::class.java))

@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.content.ContextCompat
-import com.jaeger.library.StatusBarUtil
+//import com.jaeger.library.StatusBarUtil
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.ui.activity.dialog.*
 import com.jsycn.pj_project.ui.activity.dialog.NormalDialog.*
@@ -80,8 +80,8 @@ class DialogActivity : AppCompatActivity() {
         setContentView(rootBinding.root)
         //设置底部导航栏颜色，像小米系统底部颜色会有适配问题
         window?.navigationBarColor = ContextCompat.getColor(this,R.color.dialogActBg)
-        StatusBarUtil.setTransparent(this)
-        StatusBarUtil.setLightMode(this)
+        //StatusBarUtil.setTransparent(this)
+        //StatusBarUtil.setLightMode(this)
         initClick()
     }
 

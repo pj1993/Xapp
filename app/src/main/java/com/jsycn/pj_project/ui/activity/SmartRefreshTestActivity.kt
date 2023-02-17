@@ -7,14 +7,16 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.core.entity.WebVo
+import com.jsycn.pj_project.databinding.ActivitySmartRefreshTestBinding
 import com.jsycn.pj_project.ui.widget.webview.JSAppBridgeImpl
 import com.jsycn.pj_project.ui.widget.webview.QuoteWebFragment
-import kotlinx.android.synthetic.main.activity_smart_refresh_test.*
 
 class SmartRefreshTestActivity : AppCompatActivity() {
+    private lateinit var rootBinding : ActivitySmartRefreshTestBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_smart_refresh_test)
+        rootBinding = ActivitySmartRefreshTestBinding.inflate(layoutInflater)
+        setContentView(rootBinding.root)
         initView()
     }
     private fun initView(){
@@ -34,8 +36,8 @@ class SmartRefreshTestActivity : AppCompatActivity() {
         val webVo = WebVo("https://hd.get88.cn/xiguatest/xiguaGuess/#/?szhidden=1", JSAppBridgeImpl(), false)
         val args = Bundle()
         args.putSerializable(WebVo.WEB_VO, webVo)
-        webFragment.setArguments(args)
-        view_pager.adapter = MyFragmentAdapter(supportFragmentManager,fs)
+        webFragment.arguments = args
+        rootBinding.viewPager.adapter = MyFragmentAdapter(supportFragmentManager,fs)
     }
 
 }

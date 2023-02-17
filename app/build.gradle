@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 33
@@ -73,7 +72,7 @@ dependencies {
 
 
     //    kotlin+协程
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10"
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
@@ -110,7 +109,7 @@ dependencies {
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0' // for androidx
 
     //statusbar
-    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+    //implementation 'com.jaeger.statusbarutil:library:1.5.1'
 
     //room数据库
     def room_version = "2.4.3"

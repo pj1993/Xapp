@@ -14,7 +14,7 @@ import com.jsycn.pj_project.ui.activity.StockActivity
 import com.jsycn.pj_project.core.mvvm.test.TestMVVMActivity
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.jsycn.pj_project.databinding.FragmentHomeBinding
 
 /**
  *@Description:
@@ -22,9 +22,10 @@ import kotlinx.android.synthetic.main.fragment_home.*
  *@CreateDate: 2021/1/11 18:41
  */
 class HomeFragment : LazyFragmentOld() {
-
+    private lateinit var rootBinding : FragmentHomeBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        rootBinding = FragmentHomeBinding.inflate(inflater)
+        return rootBinding.root
     }
 
     override fun lazyInit() {
@@ -39,22 +40,22 @@ class HomeFragment : LazyFragmentOld() {
         super.onViewCreated(view, savedInstanceState)
         activity?.let {
             getStatusBarHeight(it) { height ->
-                val params = v_status.layoutParams as ConstraintLayout.LayoutParams
+                val params = rootBinding.vStatus.layoutParams as ConstraintLayout.LayoutParams
                 params.height = height
-                v_status.layoutParams = params
-                v_status.visibility = View.VISIBLE
+                rootBinding.vStatus.layoutParams = params
+                rootBinding.vStatus.visibility = View.VISIBLE
             }
         }
 
         //股票
-        bt_gp.setOnClickListener {
+        rootBinding.btGp.setOnClickListener {
             startActivity(Intent(context,StockActivity::class.java))
         }
-        bt_countDown_cancel.setOnClickListener {
+        rootBinding.btCountDownCancel.setOnClickListener {
             startActivity(Intent(activity, MainActivity::class.java))
         }
         //mvvm
-        bt_mvvm.setOnClickListener {
+        rootBinding.btMvvm.setOnClickListener {
             startActivity(Intent(context,TestMVVMActivity::class.java))
         }
         LogUtils.d("home_log","我初始化了")

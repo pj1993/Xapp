@@ -3,6 +3,7 @@ package com.jsycn.pj_project.ui.activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -11,10 +12,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.jsycn.base.BaseActivity
 import com.jsycn.pj_project.R
+import com.jsycn.pj_project.databinding.ActivityHomeBinding
 import com.jsycn.pj_project.ui.fragment.HomeFragment
 import com.jsycn.pj_project.ui.fragment.ToolsFragment
 import com.jsycn.pj_project.ui.fragment.ViewFragment
-import kotlinx.android.synthetic.main.activity_home.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter
@@ -25,6 +26,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Common
 
 class HomeActivity : BaseActivity() {
 
+    private lateinit var rootBinding : ActivityHomeBinding
+
     companion object{
         val tabTitle : Array<String> = arrayOf("首页","view","工具")
         val selectedIcon : IntArray = intArrayOf(R.drawable.ic_icon_home_selected,R.drawable.ic_icon_view_selected,R.drawable.ic_icon_tools_selected)
@@ -32,8 +35,9 @@ class HomeActivity : BaseActivity() {
     }
 
 
-    override fun initLayout(): Int {
-        return R.layout.activity_home
+    override fun initLayout(): View {
+        rootBinding = ActivityHomeBinding.inflate(layoutInflater)
+        return rootBinding.root
     }
 
     override fun initView() {
@@ -81,7 +85,7 @@ class HomeActivity : BaseActivity() {
 
                 }
                 tabView.setOnClickListener {
-                    vp_home_content.currentItem = index
+                    rootBinding.vpHomeContent.currentItem = index
                 }
                 return tabView
             }
@@ -94,8 +98,8 @@ class HomeActivity : BaseActivity() {
                 return null
             }
         }
-        mi_home_tab.navigator = commonNavigator
-        ViewPagerHelper.bind(mi_home_tab,vp_home_content)
+        rootBinding.miHomeTab.navigator = commonNavigator
+        ViewPagerHelper.bind(rootBinding.miHomeTab,rootBinding.vpHomeContent)
     }
 
     private fun initViewPager(){
@@ -104,7 +108,7 @@ class HomeActivity : BaseActivity() {
             addData(ViewFragment())
             addData(ToolsFragment())
         }
-        vp_home_content.adapter =mAdapter
+        rootBinding.vpHomeContent.adapter =mAdapter
     }
 
 

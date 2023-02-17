@@ -29,7 +29,7 @@ abstract class BaseActivity: AppCompatActivity() {
         initData(savedInstanceState)
     }
 
-    abstract fun initLayout():Int
+    abstract fun initLayout():View
 
     abstract fun initView()
 

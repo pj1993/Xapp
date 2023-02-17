@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.blankj.utilcode.util.LogUtils
 import com.jsycn.pj_project.ui.activity.view.DialogActivity
 import com.jsycn.pj_project.ui.activity.view.ProgressActivity
 import com.jsycn.pj_project.databinding.FragmentViewBinding
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
-import kotlinx.android.synthetic.main.fragment_view.*
 
 /**
  *@Description:
@@ -37,10 +35,10 @@ class ViewFragment: LazyFragmentOld() {
         super.onViewCreated(view, savedInstanceState)
         activity?.let {
             getStatusBarHeight(it) { height ->
-                val params = v_status.layoutParams as ConstraintLayout.LayoutParams
+                val params = rootBind.vStatus.layoutParams as ConstraintLayout.LayoutParams
                 params.height = height
-                v_status.layoutParams = params
-                v_status.visibility = View.VISIBLE
+                rootBind.vStatus.layoutParams = params
+                rootBind.vStatus.visibility = View.VISIBLE
             }
         }
         setAndroidNativeLightStatusBar(requireActivity(), true)

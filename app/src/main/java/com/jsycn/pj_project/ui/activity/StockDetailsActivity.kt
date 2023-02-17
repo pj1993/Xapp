@@ -23,7 +23,7 @@ import com.jsycn.pj_project.core.dao.StockDataBase
 import com.jsycn.pj_project.core.entity.StockDetails
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.parse2String
-import kotlinx.android.synthetic.main.activity_stock_details.*
+import com.jsycn.pj_project.databinding.ActivityStockDetailsBinding
 import kotlinx.coroutines.*
 import kotlin.math.abs
 
@@ -34,6 +34,7 @@ import kotlin.math.abs
  * History:
  */
 class StockDetailsActivity : BaseActivity(){
+    private lateinit var rootBinding : ActivityStockDetailsBinding
     private lateinit var adapter: BaseQuickAdapter<StockDetails,QuickViewHolder>
     private val db by lazy{
         Room.databaseBuilder(applicationContext, StockDataBase::class.java,DATA_BASE_NAME)
@@ -43,20 +44,21 @@ class StockDetailsActivity : BaseActivity(){
     private val scope by lazy {
         CoroutineScope(Dispatchers.Main + Job())
     }
-    override fun initLayout(): Int {
-        return R.layout.activity_stock_details
+    override fun initLayout(): View {
+        rootBinding = ActivityStockDetailsBinding.inflate(layoutInflater)
+        return rootBinding.root
     }
     private var stockId =-1
 
     override fun initView() {
         //状态栏
         getStatusBarHeight(this) { height ->
-            val params = v_status.layoutParams as ConstraintLayout.LayoutParams
+            val params = rootBinding.vStatus.layoutParams as ConstraintLayout.LayoutParams
             params.height = height
-            v_status.layoutParams = params
-            v_status.visibility = View.VISIBLE
+            rootBinding.vStatus.layoutParams = params
+            rootBinding.vStatus.visibility = View.VISIBLE
         }
-        rv_stock_details.layoutManager = LinearLayoutManager(this)
+        rootBinding.rvStockDetails.layoutManager = LinearLayoutManager(this)
         adapter = object :BaseQuickAdapter<StockDetails,QuickViewHolder>(mutableListOf()){
             override fun onCreateViewHolder(
                 context: Context,
@@ -76,27 +78,27 @@ class StockDetailsActivity : BaseActivity(){
 
         }
         //点击事件
-        tv_price_predict_desc.setOnClickListener {
+        rootBinding.tvPricePredictDesc.setOnClickListener {
             setPredictPrice()
         }
-        tv_price_predict.setOnClickListener {
+        rootBinding.tvPricePredict.setOnClickListener {
             setPredictPrice()
         }
         //买入
-        tv_buy.setOnClickListener {
+        rootBinding.tvBuy.setOnClickListener {
             buyOrSell(true)
         }
         //卖出
-        tv_sell.setOnClickListener {
+        rootBinding.tvSell.setOnClickListener {
             buyOrSell(false)
         }
     }
 
     override fun initData(savedInstanceState: Bundle?) {
         stockId = intent.getIntExtra("stockId",-1)
-        tv_title.text = intent.getStringExtra("stockName")
+        rootBinding.tvTitle.text = intent.getStringExtra("stockName")
         //预售价格
-        tv_price_predict.text = SPUtils.getInstance().getString(stockId.toString())
+        rootBinding.tvPricePredict.text = SPUtils.getInstance().getString(stockId.toString())
         if (stockId == -1) return
         getStockDetails()
     }
@@ -121,8 +123,8 @@ class StockDetailsActivity : BaseActivity(){
                 }
                 priceCount+=item.price*item.quantity
             }
-            tv_qty.text = "$qtySum"
-            tv_price_in.text = parse2String(-priceCount/qtySum,2,false)
+            rootBinding.tvQty.text = "$qtySum"
+            rootBinding.tvPriceIn.text = parse2String(-priceCount/qtySum,2,false)
         }
     }
 
@@ -191,7 +193,7 @@ class StockDetailsActivity : BaseActivity(){
                         //确定
                         view.findViewById<TextView>(R.id.btn_selectPositive).setOnClickListener {
                             val price = view.findViewById<EditText>(R.id.txt_input_price).text.toString()
-                            tv_price_predict.text = price
+                            rootBinding.tvPricePredict.text = price
                             SPUtils.getInstance().put(stockId.toString(),price)
                             dialog?.dismiss()
                         }

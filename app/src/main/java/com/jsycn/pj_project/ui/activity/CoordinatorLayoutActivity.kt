@@ -3,21 +3,23 @@ package com.jsycn.pj_project.ui.activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.LogUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.QuickViewHolder
 import com.google.android.material.appbar.AppBarLayout
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.ui.behavior.AppBarLayoutBehavior
+import com.jsycn.pj_project.ui.widget.PowerSmartRefreshLayout
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.api.RefreshHeader
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.constant.RefreshState
 import com.scwang.smart.refresh.layout.simple.SimpleMultiListener
-import kotlinx.android.synthetic.main.activity_coordinator_layout.*
 import kotlin.math.abs
 
 /**
@@ -26,6 +28,11 @@ import kotlin.math.abs
  */
 class CoordinatorLayoutActivity : AppCompatActivity() {
     var hasShowHeader = true
+
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var abl_head : AppBarLayout
+    private lateinit var v_header : View
+    private lateinit var srl_rv : PowerSmartRefreshLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coordinator_layout)
@@ -36,6 +43,12 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
         for (i in 0..100){
             data.add("${i}个元素")
         }
+        recyclerView = findViewById(R.id.recyclerView)
+        abl_head = findViewById(R.id.abl_head)
+        v_header = findViewById(R.id.v_header)
+        srl_rv = findViewById(R.id.srl_rv)
+
+
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = object : BaseQuickAdapter<String,QuickViewHolder>(data){

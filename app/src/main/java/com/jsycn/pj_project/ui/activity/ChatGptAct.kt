@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseMultiItemAdapter
-import com.didichuxing.doraemonkit.widget.bravh.BaseMultiItemQuickAdapter
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar

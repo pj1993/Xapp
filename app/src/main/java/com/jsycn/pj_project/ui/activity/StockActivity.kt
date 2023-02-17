@@ -22,7 +22,7 @@ import com.jsycn.pj_project.core.dao.LAST_DATABASE_VERSION
 import com.jsycn.pj_project.core.dao.StockDataBase
 import com.jsycn.pj_project.core.entity.StockBean
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
-import kotlinx.android.synthetic.main.activity_stock.*
+import com.jsycn.pj_project.databinding.ActivityStockBinding
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -41,6 +41,7 @@ import java.util.*
  */
 const val DATA_BASE_NAME = "pms"
 class StockActivity : BaseActivity(){
+    private lateinit var rootBinding : ActivityStockBinding
     private lateinit var adapter: BaseQuickAdapter<StockBean, QuickViewHolder>
     private val db by lazy{
         Room.databaseBuilder(applicationContext,StockDataBase::class.java,DATA_BASE_NAME)
@@ -52,12 +53,13 @@ class StockActivity : BaseActivity(){
     }
 
 
-    override fun initLayout(): Int {
-        return R.layout.activity_stock
+    override fun initLayout(): View {
+        rootBinding = ActivityStockBinding.inflate(layoutInflater)
+        return rootBinding.root
     }
 
     override fun initView() {
-        rv_stock.layoutManager = LinearLayoutManager(this)
+        rootBinding.rvStock.layoutManager = LinearLayoutManager(this)
         adapter= object :BaseQuickAdapter<StockBean,QuickViewHolder>(mutableListOf()){
             override fun onCreateViewHolder(
                 context: Context,
@@ -84,16 +86,16 @@ class StockActivity : BaseActivity(){
             intent.putExtra("stockName",item?.stockName)
             startActivity(intent)
         }
-        rv_stock.adapter = adapter
-        tv_add_stock.setOnClickListener {
+        rootBinding.rvStock.adapter = adapter
+        rootBinding.tvAddStock.setOnClickListener {
             addStock()
         }
         //状态栏
         getStatusBarHeight(this) { height ->
-            val params = v_status.layoutParams as ConstraintLayout.LayoutParams
+            val params = rootBinding.vStatus.layoutParams as ConstraintLayout.LayoutParams
             params.height = height
-            v_status.layoutParams = params
-            v_status.visibility = View.VISIBLE
+            rootBinding.vStatus.layoutParams = params
+            rootBinding.vStatus.visibility = View.VISIBLE
         }
     }
 

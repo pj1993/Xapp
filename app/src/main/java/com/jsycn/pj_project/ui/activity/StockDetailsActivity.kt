@@ -1,7 +1,9 @@
 package com.jsycn.pj_project.ui.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
@@ -11,7 +13,7 @@ import androidx.room.Room
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.QuickViewHolder
 import com.jsycn.base.BaseActivity
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.ui.activity.dialog.CommonlyDialog
@@ -32,7 +34,7 @@ import kotlin.math.abs
  * History:
  */
 class StockDetailsActivity : BaseActivity(){
-    private lateinit var adapter: BaseQuickAdapter<StockDetails,BaseViewHolder>
+    private lateinit var adapter: BaseQuickAdapter<StockDetails,QuickViewHolder>
     private val db by lazy{
         Room.databaseBuilder(applicationContext, StockDataBase::class.java,DATA_BASE_NAME)
                 .fallbackToDestructiveMigrationFrom(LAST_DATABASE_VERSION)
@@ -55,10 +57,23 @@ class StockDetailsActivity : BaseActivity(){
             v_status.visibility = View.VISIBLE
         }
         rv_stock_details.layoutManager = LinearLayoutManager(this)
-        adapter = object :BaseQuickAdapter<StockDetails,BaseViewHolder>(R.layout.item_rv_stock,mutableListOf()){
-            override fun convert(holder: BaseViewHolder, item: StockDetails) {
-
+        adapter = object :BaseQuickAdapter<StockDetails,QuickViewHolder>(mutableListOf()){
+            override fun onCreateViewHolder(
+                context: Context,
+                parent: ViewGroup,
+                viewType: Int
+            ): QuickViewHolder {
+                return QuickViewHolder(R.layout.item_rv_stock,parent)
             }
+            override fun onBindViewHolder(
+                holder: QuickViewHolder,
+                position: Int,
+                item: StockDetails?
+            ) {
+                TODO("Not yet implemented")
+            }
+
+
         }
         //点击事件
         tv_price_predict_desc.setOnClickListener {
@@ -90,7 +105,8 @@ class StockDetailsActivity : BaseActivity(){
             val all=withContext(Dispatchers.IO){
                 db.stockDetailsDao().getStockDetailsById(stockId)
             }
-            adapter.setList(all)
+            adapter.submitList(all)
+            //adapter.setList(all)
             if (all.isNullOrEmpty()) return@launch
             //计算 仓量，当前平均价格，
             var qtySum = 0

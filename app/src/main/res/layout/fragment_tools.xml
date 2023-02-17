@@ -29,8 +29,34 @@
 
 
     <TextView
-        android:text="工具"
+        android:id="@+id/btChatGpt"
+        android:text="ChatGpt"
         android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="0dp"
+        android:background="#2E4CAF50"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/bt2"
+        android:layout_height="80dp"/>
+    <TextView
+        android:id="@+id/bt2"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:background="#18009688"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_title"
+        app:layout_constraintLeft_toRightOf="@+id/btChatGpt"
+        app:layout_constraintRight_toLeftOf="@+id/bt3"
+        android:layout_height="80dp"/>
+    <TextView
+        android:id="@+id/bt3"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:background="#278BC34A"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_title"
+        app:layout_constraintLeft_toRightOf="@+id/bt2"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="80dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

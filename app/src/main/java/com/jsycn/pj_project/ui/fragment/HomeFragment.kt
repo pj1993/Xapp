@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.blankj.utilcode.util.LogUtils
-import com.jsycn.pj_project.ui.MainActivity
+import com.jsycn.pj_project.ui.activity.MainActivity
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.ui.activity.StockActivity
 import com.jsycn.pj_project.core.mvvm.test.TestMVVMActivity
@@ -45,7 +45,6 @@ class HomeFragment : LazyFragmentOld() {
                 v_status.visibility = View.VISIBLE
             }
         }
-        setAndroidNativeLightStatusBar(requireActivity(), true)
 
         //股票
         bt_gp.setOnClickListener {

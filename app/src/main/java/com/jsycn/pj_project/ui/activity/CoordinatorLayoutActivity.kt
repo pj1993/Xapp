@@ -1,12 +1,14 @@
 package com.jsycn.pj_project.ui.activity
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.LogUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.QuickViewHolder
 import com.google.android.material.appbar.AppBarLayout
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.ui.behavior.AppBarLayoutBehavior
@@ -36,10 +38,20 @@ class CoordinatorLayoutActivity : AppCompatActivity() {
         }
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = object : BaseQuickAdapter<String,BaseViewHolder>(R.layout.item_rv_string,data){
-            override fun convert(holder: BaseViewHolder, item: String) {
+        recyclerView.adapter = object : BaseQuickAdapter<String,QuickViewHolder>(data){
+            override fun onCreateViewHolder(
+                context: Context,
+                parent: ViewGroup,
+                viewType: Int
+            ): QuickViewHolder {
+                return QuickViewHolder(R.layout.item_rv_string,parent)
+            }
+
+            override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: String?) {
                 holder.setText(R.id.tv_text,item)
             }
+
+
         }
         abl_head.setLiftable(true)
         abl_head.setLifted(true)

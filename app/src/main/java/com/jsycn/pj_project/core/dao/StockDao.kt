@@ -1,9 +1,6 @@
 package com.jsycn.pj_project.core.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.jsycn.pj_project.core.entity.StockBean
 
 /**
@@ -15,7 +12,7 @@ import com.jsycn.pj_project.core.entity.StockBean
 @Dao
 interface StockDao {
     @Query("SELECT * from stockbean")
-    suspend fun getAll():MutableList<StockBean>
+    fun getAll():MutableList<StockBean>
 
     @Query("SELECT * FROM stockbean WHERE stockId IN (:stockIds)")
     fun loadAllByIds(stockIds: IntArray): List<StockBean>
@@ -24,8 +21,8 @@ interface StockDao {
 //            "last_name LIKE :last LIMIT 1")
 //    fun findByName(first: String, last: String): StockBean
 
-    @Insert
-    suspend fun insertAll(vararg stocks: StockBean)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(vararg stocks: StockBean)
 
     @Delete
     fun delete(stock: StockBean)

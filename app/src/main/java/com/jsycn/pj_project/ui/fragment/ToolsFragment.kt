@@ -1,5 +1,6 @@
 package com.jsycn.pj_project.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import com.blankj.utilcode.util.LogUtils
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
+import com.jsycn.pj_project.databinding.FragmentToolsBinding
+import com.jsycn.pj_project.ui.activity.ChatGptAct
 import kotlinx.android.synthetic.main.fragment_tools.*
 
 /**
@@ -18,10 +21,11 @@ import kotlinx.android.synthetic.main.fragment_tools.*
  *@CreateDate: 2021/1/11 18:46
  */
 class ToolsFragment: LazyFragmentOld() {
-
+    private lateinit var rootBind : FragmentToolsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_tools, container, false)
+        rootBind = FragmentToolsBinding.inflate(inflater)
+        return rootBind.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +38,11 @@ class ToolsFragment: LazyFragmentOld() {
                 v_status.visibility = View.VISIBLE
             }
         }
-        setAndroidNativeLightStatusBar(requireActivity(), true)
+
+        rootBind.btChatGpt.setOnClickListener {
+            //进入chatGpt页面
+            startActivity(Intent(activity,ChatGptAct::class.java))
+        }
     }
 
     override fun lazyInit() {

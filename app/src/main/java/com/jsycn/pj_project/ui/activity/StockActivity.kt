@@ -1,8 +1,10 @@
 package com.jsycn.pj_project.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
@@ -11,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.QuickViewHolder
 import com.jsycn.base.BaseActivity
 import com.jsycn.pj_project.R
 import com.jsycn.pj_project.ui.activity.dialog.CommonlyDialog
@@ -39,7 +41,7 @@ import java.util.*
  */
 const val DATA_BASE_NAME = "pms"
 class StockActivity : BaseActivity(){
-    private lateinit var adapter: BaseQuickAdapter<StockBean,BaseViewHolder>
+    private lateinit var adapter: BaseQuickAdapter<StockBean, QuickViewHolder>
     private val db by lazy{
         Room.databaseBuilder(applicationContext,StockDataBase::class.java,DATA_BASE_NAME)
                 .fallbackToDestructiveMigrationFrom(LAST_DATABASE_VERSION)
@@ -56,11 +58,24 @@ class StockActivity : BaseActivity(){
 
     override fun initView() {
         rv_stock.layoutManager = LinearLayoutManager(this)
-        adapter= object :BaseQuickAdapter<StockBean,BaseViewHolder>(R.layout.item_rv_stock,mutableListOf()){
-            override fun convert(holder: BaseViewHolder, item: StockBean) {
-                holder.setText(R.id.tv_name,item.stockName)
-                        .setText(R.id.tv_code,item.stockCode)
+        adapter= object :BaseQuickAdapter<StockBean,QuickViewHolder>(mutableListOf()){
+            override fun onCreateViewHolder(
+                context: Context,
+                parent: ViewGroup,
+                viewType: Int
+            ): QuickViewHolder {
+                return QuickViewHolder(R.layout.item_rv_stock,parent)
             }
+            override fun onBindViewHolder(
+                holder: QuickViewHolder,
+                position: Int,
+                item: StockBean?
+            ) {
+                holder.setText(R.id.tv_name,item?.stockName)
+                    .setText(R.id.tv_code,item?.stockCode)
+            }
+
+
         }
         adapter.setOnItemClickListener { adapter, view, position ->
             val item = adapter.getItem(position) as? StockBean
@@ -87,7 +102,8 @@ class StockActivity : BaseActivity(){
             val all=withContext(Dispatchers.IO){
                 db.stockDao().getAll()
             }
-            adapter.setList(all)
+            adapter.submitList(all)
+            //adapter.setList(all)
         }
     }
 

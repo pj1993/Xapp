@@ -1,4 +1,4 @@
-package com.jsycn.pj_project.ui;
+package com.jsycn.pj_project.ui.activity;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
@@ -13,11 +13,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jsycn.pj_project.R;
-import com.jsycn.pj_project.ui.activity.CoordinatorLayoutActivity;
-import com.jsycn.pj_project.ui.activity.LeakCanaryActivity;
-import com.jsycn.pj_project.ui.activity.LianXupaizhaoTest;
-import com.jsycn.pj_project.ui.activity.LottieTestAct;
-import com.jsycn.pj_project.ui.activity.SmartRefreshTestActivity;
 import com.jsycn.pj_project.core.entity.MessageBean;
 import com.jsycn.pj_project.testcls.activitymode.AModeAct;
 import com.jsycn.pj_project.testcls.fragmenttest.FragmentLifeTestActivity;

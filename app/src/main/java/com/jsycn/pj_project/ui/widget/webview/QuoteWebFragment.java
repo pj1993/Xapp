@@ -145,7 +145,7 @@ public class QuoteWebFragment extends BaseRxFragment<BasePresenter> implements B
     private void initWebView() {
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setAppCacheEnabled(true);
+        //webSettings.setAppCacheEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(false);

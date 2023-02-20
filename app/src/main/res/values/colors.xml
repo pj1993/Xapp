@@ -34,4 +34,9 @@
     <color name="color_market_style_progress_center">#FF9800</color>
     <color name="color_market_style_progress_end">#FF5722</color>
     <color name="color_market_style_progress_bg">#F4F4F4</color>
+
+
+
+    <color name="color_chat_bg">#E6E3E3</color>
+    <color name="color_chat_input_bg">#3EEAE7E7</color>
 </resources>

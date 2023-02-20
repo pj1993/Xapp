@@ -10,7 +10,7 @@
         android:id="@+id/v_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#54F6EBEB"
+        android:background="@color/color_chat_bg"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="#54F6EBEB"
+        android:background="@color/color_chat_bg"
         android:gravity="center"
         android:text="ChatGpt"
         android:textColor="#333333"
@@ -29,23 +29,32 @@
         android:id="@+id/srl_chat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/clInput"
+        app:layout_constraintBottom_toTopOf="@+id/line1"
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintVertical_weight="1">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_chat"
+            android:background="@color/color_chat_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
+
+    <View
+        android:id="@+id/line1"
+        android:background="#D6D6D6"
+        app:layout_constraintBottom_toTopOf="@+id/clInput"
+        app:layout_constraintTop_toBottomOf="@+id/srl_chat"
+        android:layout_height="0.1dp"
+        android:layout_width="match_parent"/>
 
     <!--输入框-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clInput"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="#54F6EBEB"
+        android:background="@color/color_chat_input_bg"
         app:layout_constraintBottom_toTopOf="@+id/vFoot"
         app:layout_constraintTop_toBottomOf="@+id/srl_chat">
 
@@ -79,7 +88,8 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/shared_button_selector"
             android:paddingHorizontal="15dp"
-            android:paddingVertical="6dp"
+            android:paddingVertical="5dp"
+            android:textSize="15sp"
             android:text="发送"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"

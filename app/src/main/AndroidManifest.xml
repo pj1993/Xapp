@@ -18,33 +18,23 @@
         <activity android:name="com.jsycn.pj_project.ui.activity.view.DialogActivity"/>
         <activity android:name="com.jsycn.pj_project.ui.activity.HomeActivity" />
         <activity android:name="com.jsycn.pj_project.ui.activity.LeakCanaryActivity2" />
-        <activity android:name="com.jsycn.pj_project.ui.activity.LeakCanaryActivity"
-            android:exported="true"/>
-        <activity android:name="com.jsycn.pj_project.ui.activity.CoordinatorLayoutActivity"
-            android:exported="true"/>
-        <activity android:name="com.jsycn.pj_project.ui.activity.SmartRefreshTestActivity"
-            android:exported="true"/>
-        <activity android:name="com.jsycn.pj_project.ui.activity.ChatGptAct"
-            android:exported="true"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.LeakCanaryActivity"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.CoordinatorLayoutActivity"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.SmartRefreshTestActivity"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.ChatGptAct"/>
         <activity
             android:name=".testcls.activitymode.DModeAct"
-            android:exported="true"
             android:launchMode="singleInstance" />
         <activity
             android:name=".testcls.activitymode.CModeAct"
-            android:exported="true"
             android:launchMode="singleTask"
             android:taskAffinity="com.pj.cc" />
         <activity
             android:name=".testcls.activitymode.BModeAct"
-            android:exported="true"
             android:launchMode="singleTask" />
-        <activity android:name=".testcls.activitymode.AModeAct"
-            android:exported="true"/>
-        <activity android:name=".testcls.fragmenttest.FragmentLifeTestActivity"
-            android:exported="true"/>
-        <activity android:name=".ui.activity.MainActivity"
-            android:exported="true"/>
+        <activity android:name=".testcls.activitymode.AModeAct"/>
+        <activity android:name=".testcls.fragmenttest.FragmentLifeTestActivity"/>
+        <activity android:name=".ui.activity.MainActivity"/>
         <activity
             android:exported="true"
             android:name=".ui.SplashActivity"

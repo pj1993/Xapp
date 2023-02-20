@@ -19,9 +19,10 @@ import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
  *@CreateDate: 2021/1/11 18:45
  */
 class ViewFragment: LazyFragmentOld() {
-    private lateinit var rootBind :FragmentViewBinding
+    private var _rootBind :FragmentViewBinding?=null
+    private val rootBind :FragmentViewBinding get() = _rootBind!!
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootBind = FragmentViewBinding.inflate(inflater)
+        _rootBind = FragmentViewBinding.inflate(inflater)
         return rootBind.root
     }
 
@@ -64,5 +65,10 @@ class ViewFragment: LazyFragmentOld() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         Log.d("ViewFragment","setUserVisibleHint")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _rootBind = null
     }
 }

@@ -22,9 +22,10 @@ import com.jsycn.pj_project.databinding.FragmentHomeBinding
  *@CreateDate: 2021/1/11 18:41
  */
 class HomeFragment : LazyFragmentOld() {
-    private lateinit var rootBinding : FragmentHomeBinding
+    private var _rootBinding : FragmentHomeBinding? =null
+    private val rootBinding : FragmentHomeBinding get() = _rootBinding!!
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootBinding = FragmentHomeBinding.inflate(inflater)
+        _rootBinding = FragmentHomeBinding.inflate(inflater)
         return rootBinding.root
     }
 
@@ -77,4 +78,8 @@ class HomeFragment : LazyFragmentOld() {
         Log.d("homeFragment","setUserVisibleHint")
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _rootBinding = null
+    }
 }

@@ -18,10 +18,11 @@ import com.jsycn.pj_project.ui.activity.ChatGptAct
  *@CreateDate: 2021/1/11 18:46
  */
 class ToolsFragment: LazyFragmentOld() {
-    private lateinit var rootBind : FragmentToolsBinding
+    private var _rootBind : FragmentToolsBinding ? =null
+    private val rootBind : FragmentToolsBinding get() = _rootBind!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootBind = FragmentToolsBinding.inflate(inflater)
+        _rootBind = FragmentToolsBinding.inflate(inflater)
         return rootBind.root
     }
 
@@ -64,5 +65,10 @@ class ToolsFragment: LazyFragmentOld() {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         Log.d("ToolsFragment","setUserVisibleHint")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _rootBind = null
     }
 }

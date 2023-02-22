@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/ivHeader"
@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/tvMsg"
-        android:text="我奥术大师大s所多"
+        tools:text="我奥术大师大s所多"
         app:layout_constraintTop_toTopOf="@+id/ivHeader"
         app:layout_constraintRight_toLeftOf="@+id/ivHeader"
         app:layout_constraintLeft_toRightOf="@+id/chat_line"

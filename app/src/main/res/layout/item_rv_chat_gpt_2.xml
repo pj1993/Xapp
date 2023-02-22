@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <ImageView
@@ -27,7 +28,7 @@
 
     <TextView
         android:id="@+id/tvMsg"
-        android:text="我奥术大师大啊实打实的"
+        tools:text="我奥术大师大啊实打实的"
         app:layout_constraintTop_toTopOf="@+id/ivHeader"
         app:layout_constraintLeft_toRightOf="@+id/ivHeader"
         app:layout_constraintRight_toLeftOf="@+id/chat_line"

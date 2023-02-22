@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
 import com.jsycn.pj_project.databinding.FragmentToolsBinding
-import com.jsycn.pj_project.ui.activity.ChatGptAct
+import com.jsycn.pj_project.ui.activity.chat.ChatGptAct
 
 /**
  *@Description:
@@ -39,7 +39,7 @@ class ToolsFragment: LazyFragmentOld() {
 
         rootBind.btChatGpt.setOnClickListener {
             //进入chatGpt页面
-            startActivity(Intent(activity,ChatGptAct::class.java))
+            startActivity(Intent(activity, ChatGptAct::class.java))
         }
     }
 

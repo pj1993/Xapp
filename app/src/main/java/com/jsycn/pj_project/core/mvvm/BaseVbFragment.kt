@@ -34,6 +34,7 @@ abstract class BaseVbFragment<VB : ViewBinding> : LazyFragmentOld() {
     protected var hasAllComponentRefreshComplete = false
     /**
      * component是否初始化完成，页面只会初始化一次component
+     * 需要请求网络或者正在请求网络的component集合,
      */
     protected var hasInit = false
     protected var mComponents = mutableListOf<BaseVbViewComponent<*, *>>()
@@ -76,6 +77,7 @@ abstract class BaseVbFragment<VB : ViewBinding> : LazyFragmentOld() {
      */
     abstract fun loadComponent()
     protected fun BaseVbViewComponent<*, *>.attachToFragment() {
+        //TODO 小心这里会重复添加component,建议使用set
         mComponents.add(this)
         if (!hasInit) {
             setViewComponentCallBack(viewComponentCallBack)
@@ -88,7 +90,7 @@ abstract class BaseVbFragment<VB : ViewBinding> : LazyFragmentOld() {
      */
     open fun loadNet() {
         for (mComponent in mComponents) {
-            mComponent.initObserve()
+            mComponent.initObserve()//重新请求网络
         }
     }
 

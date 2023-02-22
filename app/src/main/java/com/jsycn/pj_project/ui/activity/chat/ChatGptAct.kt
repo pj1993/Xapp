@@ -20,6 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.KeyboardUtils
@@ -27,18 +28,26 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.chad.library.adapter.base.BaseMultiItemAdapter
 import com.didichuxing.doraemonkit.kit.core.TouchProxy.OnTouchEventListener
+import com.google.gson.annotations.SerializedName
 import com.jsycn.pj_project.R
+import com.jsycn.pj_project.core.http.ApiRetrofit
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
 import com.jsycn.pj_project.databinding.ActChatGptBinding
 import com.jsycn.pj_project.databinding.ItemRvChatGpt1Binding
 import com.jsycn.pj_project.databinding.ItemRvChatGpt2Binding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.http.*
 
 //https://zhuanlan.zhihu.com/p/343022200
 class ChatGptAct : AppCompatActivity() {
     private lateinit var rootBind: ActChatGptBinding
     private val adapter = ChatAdapter(mutableListOf())
     private lateinit var heightChangeWatch: LineTextWatch
+
 
     private var mSoftInputHeight = 0//进入页面默认输入法关闭
     private val softInputListener: KeyboardUtils.OnSoftInputChangedListener =
@@ -150,15 +159,10 @@ class ChatGptAct : AppCompatActivity() {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setClick() {
         rootBind.rvChat.adapter = adapter
-        val lm = LinearLayoutManager(this)
-        /*lm.orientation = LinearLayoutManager.VERTICAL
-        lm.reverseLayout = true*/
-        rootBind.rvChat.layoutManager = lm
-        /*rootBind.srlChat.setOnClickListener {
-            KeyboardUtils.hideSoftInput(this)
-        }*/
+        rootBind.rvChat.layoutManager = LinearLayoutManager(this)
         rootBind.rvChat.setOnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 KeyboardUtils.hideSoftInput(ChatGptAct@ this)
@@ -169,10 +173,34 @@ class ChatGptAct : AppCompatActivity() {
             val msgT = rootBind.editTextInput.text.toString()
             if (msgT.isBlank()) return@setOnClickListener
             adapter.add(ChatEntity().apply { id = 1;msg = msgT })
-            rootBind.editTextInput.setText("")
             scrollMsgToEnd()
+            rootBind.editTextInput.setText("")
+            toGetAnswer(msgT)
         }
         addData()
+    }
+
+    private fun toGetAnswer(msgT:String){
+        scrollMsgToEnd()
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val rq = RqData()
+                rq.prompt = "$msgT\nA"
+                val result = ApiRetrofit.getInstance()
+                    .getRetrofit("https://api.openai.com/")
+                    .create(ChatApi::class.java)
+                    .getAnswer(rq)
+                withContext(Dispatchers.Main){
+                    result.choices.forEach { it ->
+                        adapter.add(ChatEntity().apply { id = 2;msg = it.text })
+                        scrollMsgToEnd()
+                    }
+                }
+            }catch (e:java.lang.Exception){
+                LogUtils.d(e.message)
+            }
+
+        }
     }
 
     private fun addData() {
@@ -255,10 +283,42 @@ class LineTextWatch(val view: EditText, val onHeightChange: () -> Unit) : TextWa
 
 }
 
+//---------------------------------------------api------------------------------------------------
+interface ChatApi{
+    @Headers(
+        "Content-Type: application/json",
+        "Authorization: Bearer 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")
+    @POST("/v1/completions")
+    suspend fun getAnswer(@Body rq: RqData): HttpRequestResult
+}
+
 //-------------------------------------------实体-----------------------------------------------
+class HttpRequestResult{
+    var id =""
+    @SerializedName("object")
+    var objectStr =""
+    var created = 0L
+    var model =""
+    var choices = mutableListOf<MsgContent>()
+}
+class MsgContent(){
+    val text =""
+    val index =0
+    val finish_reason = "stop"
+}
 class ChatEntity {
     var id = 1//1代表自己
     var msg = ""
+}
+class RqData{
+    var model = "text-davinci-003"
+    var prompt = ""//问题
+    var temperature = 0
+    var max_tokens = 1000
+    var top_p = 1
+    var frequency_penalty = 0.0
+    var presence_penalty = 0.0
+    var stop = mutableListOf("\n")
 }
 
 //------------------------------------------adapter----------------------------------------------------

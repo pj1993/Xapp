@@ -28,18 +28,20 @@
 
     <TextView
         android:id="@+id/tvMsg"
-        tools:text="我奥术大师大啊实打实的"
+        tools:text="我奥术大师大啊实打实啊实打实的啊实打实大师大多撒所多的"
         app:layout_constraintTop_toTopOf="@+id/ivHeader"
         app:layout_constraintLeft_toRightOf="@+id/ivHeader"
         app:layout_constraintRight_toLeftOf="@+id/chat_line"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constrainedWidth="true"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:background="@drawable/shape_raduis_5_fffffff"
         android:paddingVertical="10dp"
         android:paddingHorizontal="10dp"
         android:layout_marginStart="11dp"
         android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"
         android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

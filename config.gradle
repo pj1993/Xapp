@@ -11,7 +11,7 @@ ext {
 
     version = [
             androidSupportSdkVersion: "1.0.0",
-            retrofitSdkVersion      : "2.8.1",//高版本okhttp会在4.1-4.3上（api16-19）上出问题，官方又重新更新3.12.x系列，
+            retrofitSdkVersion      : "2.9.0",//高版本okhttp会在4.1-4.3上（api16-19）上出问题，官方又重新更新3.12.x系列，
             dagger2SdkVersion       : "2.24",
             glideSdkVersion         : "4.8.0",
             butterknifeSdkVersion   : "8.8.1",

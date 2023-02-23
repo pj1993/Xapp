@@ -7,10 +7,17 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.jsycn.pj_project.core.delegate.inflateBindingWithGeneric
 import com.jsycn.pj_project.ui.fragment.LazyFragmentOld
+import kotlin.properties.ReadOnlyProperty
 
 /**
  *@Description:遇到选择困难症，1通过反射获取viewBinding，代码量简洁明了。
  * 2使用属性代理，安全无反射，但是还得写getLayoutId，感觉重复冗余。
+ * TODO fragment的viewBinding可以通过[ReadOnlyProperty]进行改造
+ * TODO fragment的viewBinding可以通过[ReadOnlyProperty]进行改造
+ * TODO fragment的viewBinding可以通过[ReadOnlyProperty]进行改造
+ * --->
+ * https://blog.csdn.net/u012452490/article/details/124525723?spm=1001.2014.3001.5501
+ *
  *@Author: jsync
  *@CreateDate: 2021/5/17 16:27
  */

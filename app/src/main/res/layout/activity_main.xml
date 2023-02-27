@@ -103,6 +103,13 @@
             android:layout_width="0dp"
             android:layout_height="40dp"/>
 
+        <Button
+            android:id="@+id/bt_qdms"
+            android:text="启动模式"
+            app:layout_constraintTop_toBottomOf="@+id/bt_countDown_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.scwang.smart.refresh.layout.SmartRefreshLayout>

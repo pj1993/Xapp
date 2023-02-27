@@ -1,5 +1,8 @@
 package com.jsycn.pj_project.ui.activity;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_floating_my).setOnClickListener(this);
         findViewById(R.id.bt_countDown).setOnClickListener(this);
         findViewById(R.id.bt_countDown_cancel).setOnClickListener(this);
+        findViewById(R.id.bt_qdms).setOnClickListener(this);
     }
 
 
@@ -133,6 +137,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_countDown_cancel:
 //                countDownTimer.onFinish();//没有效果
                 countDownTimer.cancel();
+                break;
+            case R.id.bt_qdms:
+                //启动下一个其他app的activity
+                Intent in = new Intent("com.test.action.BActivity");
+                //in.setFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
+
+                //情况1：单独设置FLAG_ACTIVITY_NEW_TASK，bAct是标准启动模式，则会在bAct的task中按照标准模式创建出b，然后将b的task叠加到当前app的task中
+                //比如：当前app的task回退栈中是 1,2。bAct所在的app中的回退栈是a,b,c。
+                //这时2启动c
+                //Intent in = new Intent("com.test.action.BActivity");
+                //in.setFlags(FLAG_ACTIVITY_NEW_TASK);
+                //startActivity(in);
+                //回退栈将会变成 1,2,,a,b,c,c。会跨task，会将当前app的task和bAct的task叠加，但是一旦切换到任务视图或按home键，叠加task将会分开。
+
+
+
+                //情况2：设置FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP，bAct是标准启动模式
+                //比如：当前app的task回退栈中是 1,2。bAct所在的app中的回退栈是a,b,c,d。
+                //这时2启动c，
+                //Intent in = new Intent("com.test.action.BActivity");
+                //in.setFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivity(in);
+                //b,c,d会先出栈，然后重新创建b，bAct中的task就只剩下a,b。然后将这个task合并到当前task中
+
+
+                //结论
+                //FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP 和 singleTask是不同
+                //singleTask模式中是不会将bAct出栈再重启onCreate的
+
+                //扩展
+                //就是说在activity上下文之外调用startActivity需要FLAG_ACTIVITY_NEW_TASK属性
+                //比如广播
+
+
+                //第五种启动模式 SingleInstancePerTask（自我翻译为:每个task中唯一的act）
+                //和singleTask很像，
+                //区别 1
+                // 但是singleTask只能在指定的task或者默认的task中创建Act
+                //而SingleInstancePerTask设置了Intent.FLAG_ACTIVITY_MULTIPLE_TASK或Intent.FLAG_ACTIVITY_NEW_DOCUMENT后
+                //会创建新的task，比如自己打开自己都会创建一个新的task
+                //区别2 (1个只会在栈底)
+                //singleInstancePerTask 会在系统已存在没有该实例的同 taskAffinity 任务栈时，重新开启一个栈，而 singleTask 则会直接在该栈顶创建 Activity
+
                 break;
         }
     }

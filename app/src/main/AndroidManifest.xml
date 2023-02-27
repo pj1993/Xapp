@@ -23,7 +23,14 @@
         <activity android:name="com.jsycn.pj_project.ui.activity.LeakCanaryActivity"/>
         <activity android:name="com.jsycn.pj_project.ui.activity.CoordinatorLayoutActivity"/>
         <activity android:name="com.jsycn.pj_project.ui.activity.SmartRefreshTestActivity"/>
-        <activity android:name="com.jsycn.pj_project.ui.activity.chat.ChatGptAct"/>
+        <activity android:name="com.jsycn.pj_project.ui.activity.chat.ChatGptAct"
+            android:launchMode="singleTask"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.jsycn.pj_project.ChatGptAct" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".testcls.activitymode.DModeAct"
             android:launchMode="singleInstance" />

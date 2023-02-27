@@ -287,7 +287,7 @@ class LineTextWatch(val view: EditText, val onHeightChange: () -> Unit) : TextWa
 interface ChatApi{
     @Headers(
         "Content-Type: application/json",
-        "Authorization: Bearer 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")
+        "Authorization: Bearer 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")
     @POST("/v1/completions")
     suspend fun getAnswer(@Body rq: RqData): HttpRequestResult
 }

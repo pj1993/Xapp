@@ -181,6 +181,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //区别2 (1个只会在栈底)
                 //singleInstancePerTask 会在系统已存在没有该实例的同 taskAffinity 任务栈时，重新开启一个栈，而 singleTask 则会直接在该栈顶创建 Activity
 
+
+
+                //singleInstance
+                //情况3：甲app的A，B，C页面，乙app的1页面
+                //假设 A->B->1->C    其中1是singleInstance1
+                //则回退栈叠加后，任务视图里面 排序为  C->B->A->1
+                //也就是说singleInstance不会影响当前回退栈的顺序，
+
                 break;
         }
     }

@@ -34,17 +34,17 @@
     <remote-repository>
       <option name="id" value="E:\sdk\extras\android\m2repository" />
       <option name="name" value="E:\sdk\extras\android\m2repository" />
-      <option name="url" value="file:/E:/sdk/extras/android/m2repository/" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../sdk/extras/android/m2repository/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="E:\sdk\extras\google\m2repository" />
       <option name="name" value="E:\sdk\extras\google\m2repository" />
-      <option name="url" value="file:/E:/sdk/extras/google/m2repository/" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../sdk/extras/google/m2repository/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="E:\sdk\extras\m2repository" />
       <option name="name" value="E:\sdk\extras\m2repository" />
-      <option name="url" value="file:/E:/sdk/extras/m2repository/" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../sdk/extras/m2repository/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven" />
@@ -75,6 +75,31 @@
       <option name="id" value="maven4" />
       <option name="name" value="maven4" />
       <option name="url" value="http://maven.aliyun.com/nexus/content/repositories/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/repositories/google" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven3" />
+      <option name="name" value="maven3" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/repositories/public" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven5" />
+      <option name="name" value="maven5" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/repositories/gradle-plugin" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://maven.aliyun.com/nexus/content/repositories/jcenter" />
     </remote-repository>
   </component>
 </project>

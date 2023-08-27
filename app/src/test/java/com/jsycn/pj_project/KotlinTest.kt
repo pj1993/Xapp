@@ -1,6 +1,8 @@
 package com.jsycn.pj_project
 
+import android.os.Looper
 import org.junit.Test
+import kotlin.concurrent.thread
 import kotlin.math.sqrt
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
@@ -22,6 +24,10 @@ class KotlinTest {
         print(list.size)
         list.clear()
         println(list.size)
+        thread {
+            //Looper.prepareMainLooper()  //Choreographer
+            Looper.prepare()
+        }
     }
 
     //1

@@ -4,19 +4,25 @@ package com.jsycn.pj_project.testcls.activitymode;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jsycn.pj_project.R;
 
-public class AModeAct extends AppCompatActivity {
+public class AModeAct extends LifeLogActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a_mode);
-        startActivity(new Intent(this,BModeAct.class));
         Log.e("taskId","A---"+getTaskId());
+        findViewById(R.id.tva).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AModeAct.this,BModeAct.class));
+            }
+        });
     }
 }
 

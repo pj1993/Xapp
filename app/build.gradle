@@ -100,8 +100,8 @@ dependencies {
 
 
     //内存泄漏
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
-    implementation 'com.squareup.leakcanary:leakcanary-object-watcher-android:2.6'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    implementation 'com.squareup.leakcanary:leakcanary-object-watcher-android:2.7'
 
     //悬浮窗
     implementation 'com.github.pj1993:FloatingView:v1.0.0'

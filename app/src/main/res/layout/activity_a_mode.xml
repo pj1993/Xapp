@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<TextView
-    android:text="AAAA"
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tva"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="AAAA" />
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.jsycn.pj_project
 
 import org.junit.Test
+import java.lang.StringBuilder
 import java.sql.DriverManager.println
 import java.util.*
 
@@ -164,5 +165,133 @@ class SuanfaTest {
         }
         return max
     }
+
+
+    //最长回文字
+    //中心扩散
+    fun longestPalindrome(s: String): String {
+        if (s.length < 2) return s
+
+        var maxStartIndex = 0
+        var maxEndIndex = 0
+        var maxLength = 0
+        val chars = s.toCharArray()
+
+        for (i in s.indices) {
+            for (j in 0..s.length / 2) {
+                var l = i - j - 1
+                var r = i + j
+                if (l < 0 || r > (s.length - 1)) {
+                    break
+                }
+                if (chars[l] == chars[r]) {
+                    //是回文字
+                    val length = r - l + 1
+                    if (maxLength < length) {
+                        maxLength = length
+                        maxStartIndex = l
+                        maxEndIndex = r
+                    }
+                } else {
+                    break
+                }
+            }
+            for (j in 1..s.length / 2) {
+                var l = i - j
+                var r = i + j
+                if (l < 0 || r > (s.length - 1)) {
+                    break
+                }
+                if (chars[l] == chars[r]) {
+                    //是回文字
+                    val length = r - l + 1
+                    if (maxLength < length) {
+                        maxLength = length
+                        maxStartIndex = l
+                        maxEndIndex = r
+                    }
+                } else {
+                    break
+                }
+            }
+
+        }
+        return s.substring(maxStartIndex, maxEndIndex + 1)
+    }
+
+    @Test
+    fun getHuiWz() {
+        val s1 = longestPalindrome("babad")
+        val s2 = longestPalindrome("cbbd")
+        var i = 3
+    }
+
+
+    //N字变换
+    //输入
+    //"PAYPALISHIRING"
+    //输出
+    //P   A   H   N
+    //A P L S I I G
+    //Y   I   R
+    fun convert(s: String, numRows: Int): String {
+        //就是 z字变换，
+        if (numRows == 1) {
+            return s
+        }
+        //有几行就有几个sb拼接，然后翻转
+        val sbs = arrayOfNulls<StringBuilder>(numRows)
+        for (i in 0 until numRows) {
+            sbs[i] = StringBuilder()
+        }
+        var flag = 1//sb的下标变换 01210
+        var index = 0;
+        for (i in s.indices) {
+            sbs[index]!!.append(s[i])
+            index += flag
+            if (index == (numRows - 1)) {
+                flag = -1
+            }
+            if (index == 0) flag = 1
+        }
+        val result = StringBuilder()
+        for (sb in sbs) {
+            result.append(sb)
+        }
+        return result.toString()
+    }
+
+    @Test
+    fun getZ() {
+        val s2 = convert("AB", 1)
+        val s1 = convert("PAYPALISHIRING", 3)
+        var i = 3
+    }
+
+    //整数翻转，主要是注意边界，边界的判断一般是边界/10 和当前值比较
+    //-2^31 , 2^31-1 Int.MAX_VALUE
+    fun reverse(x: Int): Int {
+        var inN = x
+        var res = 0
+        while (inN != 0) {
+            val remainder = inN % 10
+            val nMax = Int.MAX_VALUE / 10//最后一位是7
+            val nMin = Int.MIN_VALUE / 10//最后一位是8
+            if (res > nMax || res == nMax && remainder>7){
+                res = 0
+                break
+            }
+            if (res<nMin || res == nMin && remainder<-8){
+                res = 0
+                break
+            }
+
+            res = res * 10 + remainder
+
+            inN /= 10
+        }
+        return res
+    }
+
 
 }

@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.jsycn.pj_project.R;
 
-public class BModeAct extends AppCompatActivity {
+public class BModeAct extends LifeLogActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

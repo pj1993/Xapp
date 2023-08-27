@@ -11,6 +11,33 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.jsycn.pj_project.R;
 
+        //fragment和activity不同，activity中onPause和onStop是分开的，中间夹的a的生命周期，而fragment是onDestroyView分开的。
+        // 1 加了回退栈，b replace a，生命周期如下（只 destroyView ）
+        //2023-03-15 19:26:56.174 23096-23096/com.jsycn.pj_project E/bFragment: onPause             //b
+        //2023-03-15 19:26:56.174 23096-23096/com.jsycn.pj_project E/bFragment: onStop              //b
+        //2023-03-15 19:26:56.175 23096-23096/com.jsycn.pj_project E/aFragment: onCreateView
+        //2023-03-15 19:26:56.181 23096-23096/com.jsycn.pj_project E/aFragment: onActivityCreated
+        //2023-03-15 19:26:56.181 23096-23096/com.jsycn.pj_project E/aFragment: onStart
+        //2023-03-15 19:26:56.183 23096-23096/com.jsycn.pj_project E/bFragment: onDestroyView       //b
+        //2023-03-15 19:26:56.183 23096-23096/com.jsycn.pj_project E/aFragment: onResume
+
+        // 2 不加回退栈, b replace a，生命周期如下（会销毁fragment）
+        //2023-03-15 19:29:33.794 23362-23362/com.jsycn.pj_project E/bFragment: onPause             //b
+        //2023-03-15 19:29:33.794 23362-23362/com.jsycn.pj_project E/bFragment: onStop              //b
+        //2023-03-15 19:29:33.795 23362-23362/com.jsycn.pj_project E/aFragment: onAttach
+        //2023-03-15 19:29:33.795 23362-23362/com.jsycn.pj_project E/aFragment: onCreate
+        //2023-03-15 19:29:33.795 23362-23362/com.jsycn.pj_project E/aFragment: onCreateView
+        //2023-03-15 19:29:33.799 23362-23362/com.jsycn.pj_project E/aFragment: onActivityCreated
+        //2023-03-15 19:29:33.800 23362-23362/com.jsycn.pj_project E/aFragment: onStart
+        //2023-03-15 19:29:33.800 23362-23362/com.jsycn.pj_project E/bFragment: onDestroyView       //b
+        //2023-03-15 19:29:33.801 23362-23362/com.jsycn.pj_project E/bFragment: onDestroy           //b
+        //2023-03-15 19:29:33.801 23362-23362/com.jsycn.pj_project E/bFragment: onDetach            //b
+        //2023-03-15 19:29:33.802 23362-23362/com.jsycn.pj_project E/aFragment: onResume
+
+        //使用show 和 hide 不会走fragment的生命周期方法（只会在第一次show显示的时候会调用前6个），onHiddenChanged
+
+        //如果以ViewPager的形式添加多个Fragment，滑动切换Fragment，那么Fragment切换的时候，生命周期也不会执行，setUserVisibleHint
+
 public class FragmentLifeTestActivity extends AppCompatActivity implements View.OnClickListener {
 
     private AFragment aFragment;
@@ -85,7 +112,7 @@ public class FragmentLifeTestActivity extends AppCompatActivity implements View.
 
     private void replaceFragment(Fragment f) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_content, f)
-                .addToBackStack(null)
+                //.addToBackStack(null)
                 .commit();
     }
 

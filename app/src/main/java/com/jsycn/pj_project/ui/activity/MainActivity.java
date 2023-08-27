@@ -23,6 +23,9 @@ import com.jsycn.pj_project.ui.widget.MessageFloatingView;
 import com.jsyncpj.floating.FloatingCtrl;
 import com.jsyncpj.floating.model.FloatingIntent;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CyclicBarrier;
+
 //测试提交
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //CyclicBarrier a = new CyclicBarrier(4);  //java线程的同步屏障
+        //CompletableFuture
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("lifeCycle","MainActivity----------onCreate()");
@@ -156,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //情况2：设置FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP，bAct是标准启动模式
                 //比如：当前app的task回退栈中是 1,2。bAct所在的app中的回退栈是a,b,c,d。
-                //这时2启动c，
+                //这时2启动b，
                 //Intent in = new Intent("com.test.action.BActivity");
                 //in.setFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivity(in);
@@ -180,7 +185,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //会创建新的task，比如自己打开自己都会创建一个新的task
                 //区别2 (1个只会在栈底)
                 //singleInstancePerTask 会在系统已存在没有该实例的同 taskAffinity 任务栈时，重新开启一个栈，而 singleTask 则会直接在该栈顶创建 Activity
-
+                //比如 1-2-3-1-2-3-1,这种会有两个栈 一：1,2   二：3,1（这没有特殊设置，再次启动3时，12出栈，然后启动1入栈）
+                //启动3的时候就会创建一个同taskAffinity的栈，并且里面还能放1
 
 
                 //singleInstance

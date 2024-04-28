@@ -36,11 +36,14 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".testcls.activitymode.CModeAct"
-            android:launchMode="singleTask"
-            android:taskAffinity="com.pj.cc" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.jsycn.pj_project.CModeAct" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".testcls.activitymode.BModeAct"
-            android:launchMode="singleTask" />
+            android:name=".testcls.activitymode.BModeAct"/>
         <activity android:name=".testcls.activitymode.AModeAct"/>
         <activity android:name=".testcls.fragmenttest.FragmentLifeTestActivity"/>
         <activity android:name=".ui.activity.MainActivity"/>

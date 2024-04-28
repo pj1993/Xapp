@@ -26,6 +26,9 @@ public class AModeAct extends LifeLogActivity {
     }
 }
 
+/**
+ * @Deprecated  见 MainActivity line 152
+ */
 //总结：
 //A标准
 //B可配置

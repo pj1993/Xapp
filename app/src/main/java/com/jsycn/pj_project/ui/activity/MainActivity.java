@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //singleInstance
                 //情况3：甲app的A，B，C页面，乙app的1页面
                 //假设 A->B->1->C    其中1是singleInstance1
-                //则回退栈叠加后，任务视图里面 排序为  C->B->A->1
+                //则回退栈叠加后，任务视图里面 排序为  C->B->A->1(已验证，会有1，但是如果情况变成启动ABC，其中B是singleInstance，则不会出现B，只有CA)
                 //也就是说singleInstance不会影响当前回退栈的顺序，
 
                 break;

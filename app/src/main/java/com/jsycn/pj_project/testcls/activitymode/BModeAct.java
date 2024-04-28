@@ -27,7 +27,10 @@ public class BModeAct extends LifeLogActivity {
         findViewById(R.id.tv_startD).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BModeAct.this,DModeAct.class));
+                //startActivity(new Intent(BModeAct.this,DModeAct.class));
+                Intent in = new Intent("com.jsycn.pj_project.OneActivity");
+                //in.setFlags(FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(in);
             }
         });
         Log.e("taskId","B---"+getTaskId());

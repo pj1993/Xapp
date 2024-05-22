@@ -195,6 +195,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //则回退栈叠加后，任务视图里面 排序为  C->B->A->1(已验证，会有1，但是如果情况变成启动ABC，其中B是singleInstance，则不会出现B，只有CA)
                 //也就是说singleInstance不会影响当前回退栈的顺序，
 
+
+                //实现微信小程序那样的，启动一个小程序后，切到后台，变成两个任务视图，
+                //A启动B
+                //将B的 taskAffinity 设置成不是默认的包名，然后启动模式设置成 singletask,或者默认启动模式，但是使用FLAG_ACTIVITY_NEW_TASK，
                 break;
         }
     }

@@ -43,7 +43,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".testcls.activitymode.BModeAct"/>
+            android:name=".testcls.activitymode.BModeAct"
+            android:taskAffinity="com.pj.ttttt"/>
         <activity android:name=".testcls.activitymode.AModeAct"/>
         <activity android:name=".testcls.fragmenttest.FragmentLifeTestActivity"/>
         <activity android:name=".ui.activity.MainActivity"/>

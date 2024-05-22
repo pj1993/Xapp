@@ -20,14 +20,16 @@ public class AModeAct extends LifeLogActivity {
         findViewById(R.id.tva).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AModeAct.this,BModeAct.class));
+                Intent intent = new Intent(AModeAct.this, BModeAct.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }
 }
 
 /**
- * @Deprecated  见 MainActivity line 152
+ * @Deprecated  见 {@link  com.jsycn.pj_project.ui.activity.MainActivity } line 152
  */
 //总结：
 //A标准

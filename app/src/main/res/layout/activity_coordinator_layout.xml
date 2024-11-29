@@ -11,7 +11,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activity.CoordinatorLayoutActivity">
+        tools:context=".ui.activity.home.CoordinatorLayoutActivity">
 
         <!--头部-->
         <com.google.android.material.appbar.AppBarLayout

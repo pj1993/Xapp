@@ -16,9 +16,13 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.content.ContextCompat
 //import com.jaeger.library.StatusBarUtil
 import com.jsycn.pj_project.R
-import com.jsycn.pj_project.ui.activity.dialog.*
-import com.jsycn.pj_project.ui.activity.dialog.NormalDialog.*
+import com.jsycn.pj_project.ui.activity.view.dialog.NormalDialog.*
 import com.jsycn.pj_project.databinding.ActivityDialogBinding
+import com.jsycn.pj_project.ui.activity.view.dialog.CommonlyDialog
+import com.jsycn.pj_project.ui.activity.view.dialog.DialogManager
+import com.jsycn.pj_project.ui.activity.view.dialog.FullScreenIosDialog
+import com.jsycn.pj_project.ui.activity.view.dialog.FullscreenBottomDialog
+import com.jsycn.pj_project.ui.activity.view.dialog.NormalDialog
 import java.lang.reflect.Method
 
 

@@ -8,9 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.blankj.utilcode.util.LogUtils
-import com.jsycn.pj_project.ui.activity.MainActivity
-import com.jsycn.pj_project.R
-import com.jsycn.pj_project.ui.activity.StockActivity
+import com.jsycn.pj_project.ui.activity.home.MainActivity
+import com.jsycn.pj_project.ui.activity.home.StockActivity
 import com.jsycn.pj_project.core.mvvm.test.TestMVVMActivity
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
@@ -50,7 +49,7 @@ class HomeFragment : LazyFragmentOld() {
 
         //股票
         rootBinding.btGp.setOnClickListener {
-            startActivity(Intent(context,StockActivity::class.java))
+            startActivity(Intent(context, StockActivity::class.java))
         }
         rootBinding.btCountDownCancel.setOnClickListener {
             startActivity(Intent(activity, MainActivity::class.java))

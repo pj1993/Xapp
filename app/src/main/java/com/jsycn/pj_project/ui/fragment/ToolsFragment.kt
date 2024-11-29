@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.jsycn.pj_project.core.utils.getStatusBarHeight
 import com.jsycn.pj_project.core.utils.setAndroidNativeLightStatusBar
 import com.jsycn.pj_project.databinding.FragmentToolsBinding
-import com.jsycn.pj_project.ui.activity.chat.ChatGptAct
+import com.jsycn.pj_project.ui.activity.tools.chat.ChatGptAct
 
 /**
  *@Description:

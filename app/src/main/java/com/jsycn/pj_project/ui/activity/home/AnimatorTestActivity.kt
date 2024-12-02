@@ -504,7 +504,8 @@ class AnimatorTestActivity : AppCompatActivity() {
             Log.d("MainActivity_", "animatedFraction: "+(1 - mViewBgAnimator!!.animatedFraction))
         }*/
 
-        //这种不适合有显示和隐藏需求的写法
+        //这种不适合有显示和隐藏需求的写法(控制好现实隐藏后也可以使用,重复reverse但是没有执行到end的时候，start
+        // 只会调用一次)
         if (mViewBgAnimator!!.animatedFraction>0){
             mViewBgAnimator?.reverse()
         }else{

@@ -28,6 +28,7 @@ class AnimatorTestActivity : AppCompatActivity() {
     private lateinit var ivBig1: ImageView//透明动画d1
     private lateinit var ivBig2: ImageView
     private lateinit var llAction: View//透明动画d2
+    private lateinit var mViewBg: View
 
     var constraintSet : ConstraintSet?=null
 
@@ -42,6 +43,7 @@ class AnimatorTestActivity : AppCompatActivity() {
     var alphaAnimatorD2: ValueAnimator? = null
 
     var mIsMediaExpanding = false
+    var mIsViewExpanding = false
 
     private  var maxHeight :Int = 0
     private  var minHeight :Int =0
@@ -78,7 +80,15 @@ class AnimatorTestActivity : AppCompatActivity() {
             } else {
                 refreshAnimate(true)
             }
+        }
 
+        mViewBg = findViewById(R.id.vBg2)
+        mViewBg.setOnClickListener {
+            if (mIsViewExpanding){
+                refreshViewAnimate(false)
+            }else{
+                refreshViewAnimate(true)
+            }
         }
 
     }
@@ -440,5 +450,66 @@ class AnimatorTestActivity : AppCompatActivity() {
         getAlphaAnimatorX(toExpand).start()
         getAlphaAnimatorD1(toExpand).start()
         getAlphaAnimatorD2(toExpand).start()
+    }
+
+
+    private fun refreshViewAnimate(toExpand: Boolean){
+        mIsViewExpanding = toExpand
+        setViewAnimate(toExpand)
+    }
+    private var mViewBgAnimator:ValueAnimator?=null
+    private fun setViewAnimate(toExpand: Boolean){
+        if (mViewBgAnimator == null) {
+            mViewBgAnimator = ValueAnimator.ofInt().apply {
+                setIntValues(minHeight, maxHeight)
+                duration = 1500
+                addUpdateListener {
+                    val lp = mViewBg.layoutParams
+                    lp.height = it.animatedValue as Int
+                    mViewBg.layoutParams = lp
+                }
+
+                addListener(object :
+                    Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator) {
+                        Log.d("MainActivity_", "onAnimationStart: ")
+                    }
+
+                    override fun onAnimationEnd(animation: Animator) {
+                        //animation.is()
+                        Log.d("MainActivity_", "onAnimationEnd: ")
+                        val lp = mViewBg.layoutParams
+                        if (mIsViewExpanding) {
+                            lp.height = maxHeight
+                        } else {
+                            lp.height = minHeight
+                        }
+                        mViewBg.layoutParams = lp
+                    }
+
+                    override fun onAnimationCancel(animation: Animator) {
+                        Log.d("MainActivity_", "onAnimationCancel: ")
+                    }
+
+                    override fun onAnimationRepeat(animation: Animator) {
+                        Log.d("MainActivity_", "onAnimationRepeat: ")
+                    }
+                })
+            }
+        } /*else {
+            mViewBgAnimator?.setValues(
+                PropertyValuesHolder.ofInt("", if (toExpand) minHeight else maxHeight,
+                    if (toExpand) maxHeight else minHeight)
+            )
+            Log.d("MainActivity_", "animatedFraction: "+(1 - mViewBgAnimator!!.animatedFraction))
+        }*/
+
+        //这种不适合有显示和隐藏需求的写法
+        if (mViewBgAnimator!!.animatedFraction>0){
+            mViewBgAnimator?.reverse()
+        }else{
+            mViewBgAnimator?.start()
+        }
+
     }
 }

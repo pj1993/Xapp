@@ -113,6 +113,15 @@
         </androidx.cardview.widget.CardView>
 
 
+    <View
+        android:id="@+id/vBg2"
+        app:layout_constraintTop_toBottomOf="@+id/cdView"
+        android:layout_margin="10dp"
+        android:background="@color/color_chat_bg"
+        android:layout_width="match_parent"
+        android:layout_height="188dp">
+
+    </View>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

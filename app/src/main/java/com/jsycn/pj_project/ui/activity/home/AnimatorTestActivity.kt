@@ -30,8 +30,7 @@ class AnimatorTestActivity : AppCompatActivity() {
     private lateinit var llAction: View//透明动画d2
     private lateinit var mViewBg: View
 
-    var constraintSet : ConstraintSet?=null
-
+    var constraintSet: ConstraintSet? = null
 
 
     var objectAnimator: ObjectAnimator? = null
@@ -45,11 +44,11 @@ class AnimatorTestActivity : AppCompatActivity() {
     var mIsMediaExpanding = false
     var mIsViewExpanding = false
 
-    private  var maxHeight :Int = 0
-    private  var minHeight :Int =0
+    private var maxHeight: Int = 0
+    private var minHeight: Int = 0
 
-    private  var scaleMaxSize :Int = 0
-    private  var scaleMinSize :Int =0
+    private var scaleMaxSize: Int = 0
+    private var scaleMinSize: Int = 0
     private fun dp2Px(context: Context, dp: Float): Int {
         val displayMetrics = context.resources.displayMetrics
         return (TypedValue.applyDimension(
@@ -58,22 +57,23 @@ class AnimatorTestActivity : AppCompatActivity() {
             displayMetrics
         ) + 0.5).toInt()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_animator_test)
-        ivMin1 =findViewById(R.id.ivMin1)
+        ivMin1 = findViewById(R.id.ivMin1)
         ivMin2 = findViewById(R.id.ivMin2)
         ivBig1 = findViewById(R.id.ivBig1)
         ivBig2 = findViewById(R.id.ivBig2)
         llAction = findViewById(R.id.llAction)
-        maxHeight = dp2Px(this,412f)
-        minHeight = dp2Px(this,188f)
-        scaleMaxSize = dp2Px(this,62f)
-        scaleMinSize = dp2Px(this,40f)
+        maxHeight = dp2Px(this, 412f)
+        minHeight = dp2Px(this, 188f)
+        scaleMaxSize = dp2Px(this, 62f)
+        scaleMinSize = dp2Px(this, 40f)
         vTranslationY = findViewById(R.id.vTranslationY)
         constraintSet = ConstraintSet().apply { clone(vTranslationY) }
-        constraintSet?.setAlpha(R.id.ivBig1,0f)
+        constraintSet?.setAlpha(R.id.ivBig1, 0f)
         findViewById<View>(R.id.cdView).setOnClickListener {
             if (mIsMediaExpanding) {
                 refreshAnimate(false)
@@ -84,9 +84,9 @@ class AnimatorTestActivity : AppCompatActivity() {
 
         mViewBg = findViewById(R.id.vBg2)
         mViewBg.setOnClickListener {
-            if (mIsViewExpanding){
+            if (mIsViewExpanding) {
                 refreshViewAnimate(false)
-            }else{
+            } else {
                 refreshViewAnimate(true)
             }
         }
@@ -94,18 +94,19 @@ class AnimatorTestActivity : AppCompatActivity() {
     }
 
 
-    private var springAnimation: SpringAnimation?=null
+    private var springAnimation: SpringAnimation? = null
 
     fun getAnimate(toExpand: Boolean): ValueAnimator? {
 
-        if (springAnimation == null){
-            springAnimation = SpringAnimation(FloatValueHolder(if (toExpand) maxHeight.toFloat() else minHeight.toFloat()))
+        if (springAnimation == null) {
+            springAnimation =
+                SpringAnimation(FloatValueHolder(if (toExpand) maxHeight.toFloat() else minHeight.toFloat()))
             springAnimation?.apply {
                 setStartValue(vTranslationY.layoutParams.height.toFloat())
                 spring = SpringForce(if (toExpand) maxHeight.toFloat() else minHeight.toFloat())
                 spring.setStiffness(230f)
                 spring.setDampingRatio(0.85f)
-                addUpdateListener {animation,value,velocity->
+                addUpdateListener { animation, value, velocity ->
                     /*constraintSet?.let {
                         it.getConstraint(R.id.vTranslationY).layout.mHeight = value.toInt()
                         it.applyTo(vTranslationY)
@@ -114,7 +115,7 @@ class AnimatorTestActivity : AppCompatActivity() {
                     lp.height = value.toInt()
                     vTranslationY.layoutParams = lp
                 }
-                addEndListener{ animation,  canceled,  value, velocity->
+                addEndListener { animation, canceled, value, velocity ->
                     /*val finalHeight = if (mIsMediaExpanding) maxHeight else minHeight
                     constraintSet?.let {
                         it.getConstraint(R.id.vTranslationY).layout.mHeight = finalHeight
@@ -129,7 +130,7 @@ class AnimatorTestActivity : AppCompatActivity() {
                     vTranslationY.layoutParams = lp
                 }
             }
-        }else{
+        } else {
             springAnimation?.spring?.setFinalPosition(if (toExpand) maxHeight.toFloat() else minHeight.toFloat())
         }
         springAnimation?.start()
@@ -198,16 +199,18 @@ class AnimatorTestActivity : AppCompatActivity() {
         return null
     }
 
-    private var scaleAnimation: SpringAnimation?=null
-    fun scaleMinIcon(toExpand: Boolean){
-        if (scaleAnimation==null){
-            scaleAnimation = SpringAnimation(FloatValueHolder(if (toExpand) scaleMinSize.toFloat() else scaleMaxSize.toFloat()))
+    private var scaleAnimation: SpringAnimation? = null
+    fun scaleMinIcon(toExpand: Boolean) {
+        if (scaleAnimation == null) {
+            scaleAnimation =
+                SpringAnimation(FloatValueHolder(if (toExpand) scaleMinSize.toFloat() else scaleMaxSize.toFloat()))
             scaleAnimation?.apply {
                 setStartValue(if (toExpand) scaleMaxSize.toFloat() else scaleMinSize.toFloat())
-                spring = SpringForce(if (toExpand) scaleMinSize.toFloat() else scaleMaxSize.toFloat())
+                spring =
+                    SpringForce(if (toExpand) scaleMinSize.toFloat() else scaleMaxSize.toFloat())
                 spring.setStiffness(300f)
                 spring.setDampingRatio(0.9f)
-                addUpdateListener {animation,value,velocity->
+                addUpdateListener { animation, value, velocity ->
                     constraintSet?.let {
                         it.getConstraint(R.id.ivMin1).layout.apply {
                             mHeight = value.toInt()
@@ -221,8 +224,12 @@ class AnimatorTestActivity : AppCompatActivity() {
                     lp.width = value.toInt()
                     ivMin1.layoutParams = lp*/
                 }
-                addEndListener{ animation,  canceled,  value, velocity->
-                    val finalSize = if (mIsMediaExpanding) { scaleMinSize } else { scaleMaxSize }
+                addEndListener { animation, canceled, value, velocity ->
+                    val finalSize = if (mIsMediaExpanding) {
+                        scaleMinSize
+                    } else {
+                        scaleMaxSize
+                    }
                     constraintSet?.let {
                         it.getConstraint(R.id.ivMin1).layout.apply {
                             mHeight = finalSize
@@ -242,7 +249,7 @@ class AnimatorTestActivity : AppCompatActivity() {
                     ivMin1.layoutParams = lp*/
                 }
             }
-        }else{
+        } else {
             scaleAnimation?.spring?.setFinalPosition(if (toExpand) scaleMinSize.toFloat() else scaleMaxSize.toFloat())
         }
         scaleAnimation?.start()
@@ -251,7 +258,7 @@ class AnimatorTestActivity : AppCompatActivity() {
 
     fun getAlphaAnimatorX(toExpand: Boolean): ValueAnimator {
 
-        if (alphaAnimatorX1 == null){
+        if (alphaAnimatorX1 == null) {
             alphaAnimatorX1 = ValueAnimator.ofFloat().apply {
                 setFloatValues(1f, 0f)
                 setDuration(150)
@@ -275,7 +282,11 @@ class AnimatorTestActivity : AppCompatActivity() {
                     Animator.AnimatorListener {
                     override fun onAnimationStart(animation: Animator) {}
                     override fun onAnimationEnd(animation: Animator) {
-                        val alpha = if (mIsMediaExpanding) { 0f } else { 1f }
+                        val alpha = if (mIsMediaExpanding) {
+                            0f
+                        } else {
+                            1f
+                        }
                         constraintSet?.let {
                             it.getConstraint(R.id.ivMin1).propertySet.alpha = alpha
                             it.getConstraint(R.id.ivMin2).propertySet.alpha = alpha
@@ -298,10 +309,12 @@ class AnimatorTestActivity : AppCompatActivity() {
                     override fun onAnimationRepeat(animation: Animator) {}
                 })
             }
-        }else{
+        } else {
             alphaAnimatorX1!!.setValues(
-                PropertyValuesHolder.ofFloat("", ivMin1.alpha,
-                    if (toExpand) 0f else 1f)
+                PropertyValuesHolder.ofFloat(
+                    "", ivMin1.alpha,
+                    if (toExpand) 0f else 1f
+                )
             )
         }
         return alphaAnimatorX1!!
@@ -312,7 +325,7 @@ class AnimatorTestActivity : AppCompatActivity() {
 
         //c.getConstraint().propertySet.alpha
 
-        if (alphaAnimatorD1 == null){
+        if (alphaAnimatorD1 == null) {
             alphaAnimatorD1 = ValueAnimator.ofFloat().apply {
                 setFloatValues(0f, 1f)
                 setDuration(300)
@@ -322,7 +335,8 @@ class AnimatorTestActivity : AppCompatActivity() {
                     val alpha = it.getAnimatedValue() as Float
                     constraintSet?.let {
                         it.getConstraint(R.id.ivBig1).propertySet.alpha = alpha
-                        it.getConstraint(R.id.ivBig2).propertySet.alpha = if (!mIsMediaExpanding) 0f else alpha
+                        it.getConstraint(R.id.ivBig2).propertySet.alpha =
+                            if (!mIsMediaExpanding) 0f else alpha
                         it.applyTo(vTranslationY)
                     }
 
@@ -344,7 +358,11 @@ class AnimatorTestActivity : AppCompatActivity() {
                     Animator.AnimatorListener {
                     override fun onAnimationStart(animation: Animator) {}
                     override fun onAnimationEnd(animation: Animator) {
-                        val finalAlpha = if (mIsMediaExpanding) { 1f } else { 0f }
+                        val finalAlpha = if (mIsMediaExpanding) {
+                            1f
+                        } else {
+                            0f
+                        }
                         constraintSet?.let {
                             it.getConstraint(R.id.ivBig1).propertySet.alpha = finalAlpha
                             it.getConstraint(R.id.ivBig2).propertySet.alpha = finalAlpha
@@ -371,10 +389,12 @@ class AnimatorTestActivity : AppCompatActivity() {
                     override fun onAnimationRepeat(animation: Animator) {}
                 })
             }
-        }else{
+        } else {
             alphaAnimatorD1!!.setValues(
-                PropertyValuesHolder.ofFloat("", if (toExpand) 0f else 1f,
-                    if (toExpand) 1f else 0f)
+                PropertyValuesHolder.ofFloat(
+                    "", if (toExpand) 0f else 1f,
+                    if (toExpand) 1f else 0f
+                )
             )
         }
         return alphaAnimatorD1!!
@@ -383,27 +403,28 @@ class AnimatorTestActivity : AppCompatActivity() {
 
     fun getAlphaAnimatorD2(toExpand: Boolean): ValueAnimator {
 
-        if (alphaAnimatorD2 == null){
+        if (alphaAnimatorD2 == null) {
             alphaAnimatorD2 = ValueAnimator.ofFloat().apply {
                 setFloatValues(0f, 1f)
                 duration = 300
                 startDelay = 200
                 interpolator = FastOutSlowInInterpolator()
 
-                addUpdateListener { value->
+                addUpdateListener { value ->
 
                     constraintSet?.let {
-                        it.getConstraint(R.id.llAction).propertySet.alpha = if (!mIsMediaExpanding) 0f else (value.animatedValue as Float)
+                        it.getConstraint(R.id.llAction).propertySet.alpha =
+                            if (!mIsMediaExpanding) 0f else (value.animatedValue as Float)
                         it.applyTo(vTranslationY)
                     }
 
 
-                   /* if (!mIsMediaExpanding){
-                        llAction.alpha = 0f
-                        return@addUpdateListener
-                    }
-                    val alpha = value.getAnimatedValue() as Float
-                    llAction.alpha = alpha*/
+                    /* if (!mIsMediaExpanding){
+                         llAction.alpha = 0f
+                         return@addUpdateListener
+                     }
+                     val alpha = value.getAnimatedValue() as Float
+                     llAction.alpha = alpha*/
                 }
 
                 addListener(object :
@@ -411,7 +432,8 @@ class AnimatorTestActivity : AppCompatActivity() {
                     override fun onAnimationStart(animation: Animator) {}
                     override fun onAnimationEnd(animation: Animator) {
                         constraintSet?.let {
-                            it.getConstraint(R.id.llAction).propertySet.alpha = if (mIsMediaExpanding) 1f else 0f
+                            it.getConstraint(R.id.llAction).propertySet.alpha =
+                                if (mIsMediaExpanding) 1f else 0f
                             it.applyTo(vTranslationY)
                         }
 
@@ -427,11 +449,13 @@ class AnimatorTestActivity : AppCompatActivity() {
                     override fun onAnimationRepeat(animation: Animator) {}
                 })
             }
-        }else{
+        } else {
             alphaAnimatorD2!!.startDelay = if (toExpand) 200 else 0
             alphaAnimatorD2!!.setValues(
-                PropertyValuesHolder.ofFloat("", llAction.alpha,
-                    if (toExpand) 1f else 0f)
+                PropertyValuesHolder.ofFloat(
+                    "", llAction.alpha,
+                    if (toExpand) 1f else 0f
+                )
             )
         }
         return alphaAnimatorD2!!
@@ -453,12 +477,13 @@ class AnimatorTestActivity : AppCompatActivity() {
     }
 
 
-    private fun refreshViewAnimate(toExpand: Boolean){
+    private fun refreshViewAnimate(toExpand: Boolean) {
         mIsViewExpanding = toExpand
         setViewAnimate(toExpand)
     }
-    private var mViewBgAnimator:ValueAnimator?=null
-    private fun setViewAnimate(toExpand: Boolean){
+
+    private var mViewBgAnimator: ValueAnimator? = null
+    private fun setViewAnimate(toExpand: Boolean) {
         if (mViewBgAnimator == null) {
             mViewBgAnimator = ValueAnimator.ofInt().apply {
                 setIntValues(minHeight, maxHeight)
@@ -506,9 +531,9 @@ class AnimatorTestActivity : AppCompatActivity() {
 
         //这种不适合有显示和隐藏需求的写法(控制好现实隐藏后也可以使用,重复reverse但是没有执行到end的时候，start
         // 只会调用一次)
-        if (mViewBgAnimator!!.animatedFraction>0){
+        if (mViewBgAnimator!!.animatedFraction > 0) {
             mViewBgAnimator?.reverse()
-        }else{
+        } else {
             mViewBgAnimator?.start()
         }
 

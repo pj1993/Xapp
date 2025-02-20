@@ -7,6 +7,11 @@ import android.os.Looper;
 import android.os.Message;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.dynamicanimation.animation.DynamicAnimation;
+import androidx.dynamicanimation.animation.FloatPropertyCompat;
+import androidx.dynamicanimation.animation.FloatValueHolder;
+import androidx.dynamicanimation.animation.SpringAnimation;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -82,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_countDown_cancel).setOnClickListener(this);
         findViewById(R.id.bt_qdms).setOnClickListener(this);
         findViewById(R.id.btAnimator).setOnClickListener(this);
+        findViewById(R.id.bt_spring).setOnClickListener(this);
     }
 
 
@@ -198,8 +204,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btAnimator:
                 startActivity(new Intent(this, AnimatorTestActivity.class));
                 break;
+            case R.id.bt_spring:
+                springAnimateTest();
+                break;
         }
     }
+
+    private void springAnimateTest(){
+        View view = findViewById(R.id.cbtv);
+        //SpringAnimation sa = new SpringAnimation(new FloatValueHolder(),1f);
+        FloatPropertyCompat<View> fpc = new FloatPropertyCompat<View>("translation_x") {
+            @Override
+            public float getValue(View v) {
+                return v.getTranslationX();
+            }
+
+            @Override
+            public void setValue(View v, float value) {
+                v.setTranslationX(value);
+            }
+        };
+        SpringAnimation sa = new SpringAnimation(view,fpc,100);
+        sa.setStartValue(0);
+        sa.getSpring().setDampingRatio(1.2f);
+        sa.getSpring().setStiffness(1800);
+        /*sa.addUpdateListener(new DynamicAnimation.OnAnimationUpdateListener() {
+            @Override
+            public void onAnimationUpdate(DynamicAnimation animation, float value, float velocity) {
+                view.setTranslationX(value);
+            }
+        });*/
+        sa.start();
+
+    }
+
     private void showDialog(){
         new AlertDialog.Builder(this).setTitle("12").setMessage("asd").create().show();
     }

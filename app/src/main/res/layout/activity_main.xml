@@ -119,13 +119,20 @@
             app:layout_constraintTop_toBottomOf="@+id/bt_countDown_cancel"
             android:layout_width="match_parent"
             android:layout_height="40dp"/>
+        <Button
+            android:id="@+id/bt_spring"
+            android:text="spring动画测试"
+            app:layout_constraintTop_toBottomOf="@+id/bt_qdms"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
 
         <com.jsycn.pj_project.ui.widget.view.CircleBgTextView
+            android:id="@+id/cbtv"
             android:background="#f00"
             android:text="好"
             android:gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_qdms"
+            app:layout_constraintTop_toBottomOf="@+id/bt_spring"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
 
